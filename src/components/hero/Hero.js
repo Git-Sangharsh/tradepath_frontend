@@ -20,7 +20,7 @@ const Hero = () => {
           className="hero-header-wrapper flex-center"
           initial={{ opacity: 0, y: 40, filter: "blur(10px)" }}
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          transition={{ duration: 0.8, delay: 0.5 }}
+          transition={{ duration: 0.8, delay: 0.5, type: "tween" }}
         >
           <h1 className="hero-header font-var">
             YOUR <span className="hero-header-span">AI-POWERED</span> PATH TO{" "}
@@ -32,7 +32,7 @@ const Hero = () => {
           className="hero-p"
           initial={{ opacity: 0, y: 40, filter: "blur(10px)" }}
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          transition={{ duration: 0.8, delay: 1 }}
+          transition={{ duration: 0.8, delay: 1, type: "tween" }}
         >
           Stop guessing. Start winning — TradePath AI analyzes your trading
           and habits to maximize success and profitability.
@@ -42,7 +42,7 @@ const Hero = () => {
           className="here-wrapper-btn font-var"
           initial={{ opacity: 0, y: 40, filter: "blur(10px)" }}
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          transition={{ duration: 0.8, delay: 1.5 }}
+          transition={{ duration: 0.8, delay: 1.5, type: "tween"}}
         >
           Get Started Now
         </motion.div>

@@ -38,6 +38,17 @@
     font-weight: 400;
 }
 
+.font-var-2{
+          font-family: "Roboto", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    font-variation-settings:
+      "wdth" 100;
+    margin-top: 0.5rem;
+    line-height: 0.9;
+}
+
 .hero-header-wrapper {
     width: 50%;
     flex-direction: column;

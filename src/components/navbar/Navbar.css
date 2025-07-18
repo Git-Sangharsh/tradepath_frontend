@@ -1,0 +1,101 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.navbar {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  padding: 15px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: sans-serif;
+  color: white;
+  background: rgba(0, 0, 0, 0.2); /* Transparent background */
+  backdrop-filter: blur(8px);     /* Optional: glass effect */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 40px;
+  z-index: 1000;
+}
+
+/* Left: Logo */
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo-icon {
+  font-size: 24px;
+  color: #00ff99;
+}
+
+.logo-text {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.navbar-menu {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+  padding: 8px 30px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 40px;
+  background: rgba(0, 255, 100, 0.05);
+}
+
+.navbar-menu li {
+  color: #aaa;
+  cursor: pointer;
+  transition: color 0.3s ease, transform 0.3s ease;
+  transform-origin: center;
+  will-change: transform;
+  display: inline-block;
+  min-width: 60px; /* 👈 add fixed or min width */
+  text-align: center;
+}
+
+.navbar-menu li.active,
+.navbar-menu li:hover {
+  color: white;
+}
+
+/* Right: Buttons */
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.cta-btn {
+  background-color: #00ff99;
+  color: black;
+  padding: 10px 20px;
+  font-weight: bold;
+  border: none;
+  border-radius: 40px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.cta-btn:hover {
+  background-color: #00e68a;
+}
+
+.login {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.login-icon {
+  font-size: 20px;
+}

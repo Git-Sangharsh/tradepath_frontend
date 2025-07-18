@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+.hero-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.hero-wrapper{
+    /* border: 2px solid red; */
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+.flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.font-var{
+    font-family: "Bebas Neue", sans-serif;
+    font-weight: 400;
+}
+
+.hero-header-wrapper {
+    width: 50%;
+    flex-direction: column;
+}
+
+.hero-header {
+    font-style: normal;
+    color: aliceblue;
+    /* font-size: clamp(2.5rem, 6vw, 6rem); */
+    font-size: 6rem;
+    line-height: .9; /* 👈 Add this */
+
+}
+
+.hero-header-span {
+    color: #3DFf90;
+}
+
+.hero-p {
+    color: white;
+    font-weight: lighter;
+    text-align: center;
+    font-family: "Roboto", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    font-variation-settings:
+      "wdth" 100;
+    margin-top: 0.5rem;
+}
+
+.here-wrapper-btn {
+    background-color: #3DFF90;
+    padding: 1rem 5rem;
+    border-radius: 30px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+
+  .here-wrapper-btn:hover {
+    transform: scale(1.1);
+    /* box-shadow: 0 10px 20px rgba(61, 255, 144, 0.3); */
+    background-color: #2FEF80;
+  }

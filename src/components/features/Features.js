@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import "./Features.css";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import DashboardAsset from "../../assets/dashboard.mp4";
 import AnalysisAsset from "../../assets/statistics.mp4";
 import BaisAsset from "../../assets/bais.mp4";
 import ZenAsset from "../../assets/zen.mp4";
-// import LeftAssetBg from "../../assets/left_bg.png";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const featuresData = [
   {
@@ -38,17 +41,64 @@ const featuresData = [
 ];
 
 const Features = () => {
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const leftElements = sectionRef.current.querySelectorAll(".features-left");
+    const rightElements = sectionRef.current.querySelectorAll(".features-right");
+
+    leftElements.forEach((el, i) => {
+      gsap.fromTo(
+        el,
+        { x: -100, opacity: 0 },
+        {
+          x: 0,
+          opacity: 1,
+          duration: 1.5,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: el,
+            start: "top 80%",
+            toggleActions: "play none none reverse",
+          },
+        }
+      );
+    });
+
+    rightElements.forEach((el, i) => {
+      gsap.fromTo(
+        el,
+        { x: 100, opacity: 0 },
+        {
+          x: 0,
+          opacity: 1,
+          duration: 1.5,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: el,
+            start: "top 80%",
+            toggleActions: "play none none reverse",
+          },
+        }
+      );
+    });
+
+    return () => {
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    };
+  }, []);
+
   return (
-    <section className="features">
+    <section className="features" ref={sectionRef}>
       {featuresData.map((feature, index) => (
         <div
           key={index}
           className={`features-wrapper ${index % 2 !== 0 ? "reverse" : ""}`}
         >
-          <div
-            className="features-left"
-            // style={{ backgroundImage: `url(${LeftAssetBg})`  }}
-          >
+          <div className="features-left">
+            <span className="corner top-right"></span>
+            <span className="corner bottom-left"></span>
+
             <h4 className="features-subtitle font-var">{feature.subtitle}</h4>
             <h2 className="features-title font-var-2">{feature.title}</h2>
             <p className="features-description font-var-2">

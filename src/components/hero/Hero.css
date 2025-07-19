@@ -124,6 +124,11 @@
 
 /* ========== Small Devices (Mobiles < 768px) ========== */
 @media screen and (max-width: 767px) {
+
+  .hero-container{
+    padding-top: 5rem !important;
+    height: 80vh;
+  }
   .hero-header {
     font-size: 2.5rem;
     padding: 0 1rem;

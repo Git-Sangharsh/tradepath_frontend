@@ -118,7 +118,7 @@
 @media (max-width: 768px) {
   .features-wrapper {
     flex-direction: column;
-    padding: 1.5rem 1.5rem;
+    padding: 0.8rem 5%;
     /* border: 2px solid red; */
     width: 100%;
   }

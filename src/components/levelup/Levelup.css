@@ -1,5 +1,5 @@
 .levelup{
-    min-height: 100vh;
+    height: 100vh;
     background-color: #000;
 }
 .levelup-wrapper{
@@ -40,6 +40,9 @@
 
 
 @media (max-width: 768px) {
+    .levelup{
+        height: 100% !important;
+    }
   .levelup-wrapper {
     width: 100%;
     padding: 5%;
@@ -47,7 +50,7 @@
   }
 
   .levelup-title {
-    font-size: clamp(1.75rem, 5vw, 2.5rem); 
+    font-size: clamp(1.75rem, 5vw, 2.5rem);
     width: 100%;
     line-height: 1.1;
     text-align: center;

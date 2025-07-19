@@ -8,8 +8,9 @@
 .navbar {
   position: fixed;
   top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 0;
+  right: 0;
+  margin: 0 auto;
   width: 80%;
   padding: 15px 40px;
   display: flex;
@@ -17,14 +18,13 @@
   justify-content: space-between;
   font-family: sans-serif;
   color: white;
-  background: rgba(0, 0, 0, 0.2); /* Transparent background */
-  backdrop-filter: blur(8px);     /* Optional: glass effect */
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 40px;
   z-index: 1000;
 }
 
-/* Left: Logo */
 .navbar-logo {
   display: flex;
   align-items: center;
@@ -71,7 +71,7 @@
 .navbar-actions {
   display: flex;
   align-items: center;
-  gap: 20px;
+  /* gap: 20px; */
 }
 
 .cta-btn {
@@ -99,3 +99,5 @@
 .login-icon {
   font-size: 20px;
 }
+
+

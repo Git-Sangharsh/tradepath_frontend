@@ -92,8 +92,6 @@
     margin: 1rem 0rem;
 }
 
-
-
 /* ========== Large Devices (Desktops > 1200px) ========== */
 @media screen and (min-width: 1201px) {
   .hero-header {
@@ -145,3 +143,7 @@
     font-size: 0.85rem;
   }
 }
+
+
+
+

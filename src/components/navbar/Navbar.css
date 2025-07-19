@@ -10,8 +10,8 @@
   top: 20px;
   left: 0;
   right: 0;
-  margin: 0 auto;
   width: 80%;
+  margin: 0 auto;
   padding: 15px 40px;
   display: flex;
   align-items: center;
@@ -24,6 +24,7 @@
   border-radius: 40px;
   z-index: 1000;
 }
+
 
 .navbar-logo {
   display: flex;
@@ -101,3 +102,18 @@
 }
 
 
+@media (max-width: 768px){
+  .navbar{
+    width: 100%;
+    top: 0;
+    border-radius: 0;
+  }
+
+  .navbar-menu{
+    display: none;
+  }
+
+  .navbar-actions{
+    display: none;
+  }
+}

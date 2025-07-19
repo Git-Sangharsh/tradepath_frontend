@@ -7,7 +7,7 @@ const Navbar = () => {
   const [showNavbar, setShowNavbar] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
 
-  
+
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
@@ -36,6 +36,7 @@ const Navbar = () => {
           transition={{ duration: 0.4, ease: "easeOut" }}
           className="navbar"
         >
+
           <div className="navbar-logo">
             <span className="logo-text">TRADEPATH</span>
           </div>
@@ -50,6 +51,7 @@ const Navbar = () => {
           <div className="navbar-actions">
             <button className="cta-btn font-var-2">Get Started Now</button>
           </div>
+
         </motion.nav>
       )}
     </AnimatePresence>

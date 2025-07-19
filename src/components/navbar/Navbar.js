@@ -16,7 +16,7 @@ const Navbar = () => {
       </div>
 
       {/* Center - Menu */}
-      <ul className="navbar-menu">
+      <ul className="navbar-menu font-var-2">
         <li className="active">Home</li>
         <li>Features</li>
         <li>How it works</li>

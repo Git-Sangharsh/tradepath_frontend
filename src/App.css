@@ -2,11 +2,28 @@ html,
 body {
   scroll-behavior: auto;
   overflow-x: hidden;
+  overflow-y: scroll;
+
+  /* Hide scrollbar for all browsers */
+  scrollbar-width: none;        /* Firefox */
+  -ms-overflow-style: none;     /* IE and Edge */
 }
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
 #smooth-wrapper {
   height: 100%;
   overflow: hidden;
 }
 #smooth-content {
   will-change: transform;
+}
+
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
 }

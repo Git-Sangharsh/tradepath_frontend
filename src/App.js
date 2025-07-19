@@ -5,7 +5,7 @@ import Hero from './components/hero/Hero';
 import Features from './components/features/Features';
 const App = () => {
   return (
-    <div>
+    <div className='app'>
       <Navbar />
       <Hero />
       <Features />

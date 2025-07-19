@@ -12,7 +12,6 @@ const Navbar = () => {
     >
       {/* Left - Logo */}
       <div className="navbar-logo">
-        <span className="logo-icon">📈</span>
         <span className="logo-text">TRADEPATH</span>
       </div>
 
@@ -27,7 +26,7 @@ const Navbar = () => {
 
       {/* Right - Actions */}
       <div className="navbar-actions">
-        <button className="cta-btn">Get Started Now</button>
+        <button className="cta-btn font-var-2">Get Started Now</button>
         <span className="login">
           {/* <span className="login-icon">👤</span> Log In */}
         </span>

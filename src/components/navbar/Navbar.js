@@ -7,6 +7,7 @@ const Navbar = () => {
   const [showNavbar, setShowNavbar] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
 
+  
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;

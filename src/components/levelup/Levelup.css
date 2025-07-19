@@ -1,0 +1,41 @@
+.levelup{
+    min-height: 100vh;
+    background-color: #000;
+}
+.levelup-wrapper{
+    flex-direction: column;
+    width: 50%;
+    gap: 1rem;
+}
+
+.levelup-title{
+    color: white;
+    width: 80%;
+    line-height: 0.9;
+    text-align: center;
+    font-size: 5rem;
+}
+
+.levelup-p{
+    color: #bdbdbd;
+    width: 50%;
+    text-align: center;
+    font-size: 0.9rem;
+    line-height: 1.1;
+}
+.levelup-btn{
+    margin: 1rem 0rem;
+    color: white;
+    background-color: #3df990;
+    padding: 0.8rem 2.5rem;
+    color: black;
+    border-radius: 20px;
+}
+
+.levelup-video{
+    width: 100%;
+    border-radius: 6px;
+    border: 0.5px solid rgba(255, 255, 255, 0.212);
+}
+
+

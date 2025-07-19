@@ -39,7 +39,7 @@ const Hero = () => {
         </motion.p>
 
         <motion.div
-          className="here-wrapper-btn font-var"
+          className=" font-var start-btn  "
           initial={{ opacity: 0, y: 40, filter: "blur(10px)" }}
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           transition={{ duration: 0.8, delay: 1.5, type: "tween"}}

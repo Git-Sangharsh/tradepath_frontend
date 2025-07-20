@@ -1,7 +1,13 @@
 import AuthAsset from "../../assets/signup.mp4";
 import "../signup/signup.css";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const navigate = useNavigate();
+  const SignupRoute = () => {
+    navigate("/auth/signup");
+  };
+
   return (
     <div className="auth-container">
       <div className="auth-wrapper">
@@ -19,7 +25,10 @@ const Login = () => {
             className="auth-input font-var-2"
           />
           <button className="auth-btn font-var-2">Login</button>
+          <h6 className="auth-link font-var-2" onClick={SignupRoute}>Sign up and get started today!</h6>
         </div>
+
+        {/* Heading just below auth box */}
 
         <div className="video-wrapper">
           <video src={AuthAsset} autoPlay muted loop playsInline />

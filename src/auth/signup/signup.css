@@ -91,3 +91,13 @@
   height: 100%;
   object-fit: cover;
 }
+
+
+.auth-link{
+  text-align: center;
+}
+
+.auth-link:hover{
+  text-decoration: underline;
+  cursor: pointer;
+}

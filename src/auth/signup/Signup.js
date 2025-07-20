@@ -1,7 +1,14 @@
 import "./signup.css";
 import AuthAsset from "../../assets/signup.mp4";
+import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
+  const navigate = useNavigate();
+
+  const LoginRoute = () => {
+    navigate("/auth/login")
+  };
+
   return (
     <div className="auth-container">
       <div className="auth-wrapper">
@@ -12,6 +19,8 @@ const Signup = () => {
           <input type="email" placeholder="Email" className="auth-input font-var-2"  />
           <input type="password" placeholder="Password" className="auth-input font-var-2"  />
           <button className="auth-btn font-var-2">Sign Up</button>
+          <h6 className="auth-link font-var-2" onClick={LoginRoute}>Already have an Account? Login Now!</h6>
+
         </div>
 
         <div className="video-wrapper">

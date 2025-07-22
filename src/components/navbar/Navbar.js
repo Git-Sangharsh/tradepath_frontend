@@ -3,9 +3,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import ScrollIntoView from "react-scroll-into-view";
 import "./Navbar.css";
 import { useNavigate } from "react-router-dom";
+            import { useDispatch } from "react-redux";
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [showNavbar, setShowNavbar] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
@@ -45,6 +47,10 @@ const Navbar = () => {
 
           <div className="navbar-logo">
             <span className="logo-text">TRADEPATH</span>
+               <button onClick={() => dispatch({ type: "TOGGLE_JOURNAL_MODAL", payload: true })}>
+      Add Journal Entry
+    </button>
+
           </div>
 
           <ul className="navbar-menu font-var-2">

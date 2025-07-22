@@ -1,0 +1,151 @@
+.modal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal-wrapper {
+  background-color: #0a0a0a;
+  width: 90%;
+  max-width: 450px;
+  max-height: 85vh;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+  animation: fadeInScale 0.3s ease;
+  color: #00ff9f;
+  /* overflow-y: auto; */
+  /* Custom scrollbar styling */
+  scrollbar-width: thin;
+  scrollbar-color: #00ff9f #111;
+}
+
+/* Webkit scrollbar styling */
+.modal-wrapper::-webkit-scrollbar {
+  width: 6px;
+}
+
+.modal-wrapper::-webkit-scrollbar-track {
+  background: #111;
+  border-radius: 3px;
+}
+
+.modal-wrapper::-webkit-scrollbar-thumb {
+  background: #00ff9f;
+  border-radius: 3px;
+}
+
+.modal-wrapper::-webkit-scrollbar-thumb:hover {
+  background: #00cc7f;
+}
+
+.modal-title{
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.4rem;
+}
+
+.modal-wrapper h2 {
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  color: #00ff9f;
+}
+
+.modal-wrapper form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+/* Full width elements */
+.modal-wrapper form > input[name="asset"],
+.modal-wrapper form > input[name="date"],
+.modal-wrapper form > textarea,
+.modal-wrapper form > .confluence-section,
+.modal-wrapper form > button {
+  grid-column: 1 / -1;
+}
+
+.confluence-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.select-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.modal-wrapper input,
+.modal-wrapper select,
+.modal-wrapper textarea {
+  padding: 0.5rem;
+  border: 1px solid #333;
+  background-color: #111;
+  color: white;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  width: 100%;
+  box-sizing: border-box;
+  /* border: 3px solid red; */
+  /* background-color: #0A0A0A; */
+}
+
+.modal-wrapper textarea {
+  resize: vertical;
+  min-height: 70px;
+  max-height: 120px;
+}
+
+.modal-wrapper button {
+  padding: 0.6rem 1rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  transition: all 0.2s;
+}
+
+.modal-wrapper button[type="submit"] {
+  background-color: #00ff9f;
+  color: #0a0a0a;
+  font-weight: 600;
+}
+
+.modal-wrapper button[type="submit"]:hover {
+  background-color: #00cc7f;
+  transform: translateY(-1px);
+}
+
+.modal-wrapper .cancel {
+  background-color: #333;
+  color: #00ff9f;
+  margin-top: 0.3rem;
+}
+
+.modal-wrapper .cancel:hover {
+  background-color: #444;
+  transform: translateY(-1px);
+}
+
+.confluence-label,
+.select-label {
+  font-size: 0.85rem;
+  color: #ccc;
+  margin-bottom: 0.2rem;
+  font-weight: 500;
+}
+
+.select__multi-value__label css-uo46il{
+  color: white;
+}

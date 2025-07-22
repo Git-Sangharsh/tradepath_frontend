@@ -9,6 +9,7 @@ import Login from "./auth/login/Login";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Entry from "./dashboard/entry/Entry";
 import Table from "./dashboard/table/Table";
+import JournalModal from "./dashboard/journalmodal/JournalModal";
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
             <div className="app">
               <ScrollIndicator />
               <Navbar />
+              <JournalModal />
               <Hero />
               <section id="features">
                 <Features />

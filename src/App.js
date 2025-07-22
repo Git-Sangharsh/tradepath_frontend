@@ -7,6 +7,8 @@ import Levelup from "./components/levelup/Levelup";
 import Signup from "./auth/signup/Signup";
 import Login from "./auth/login/Login";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Entry from "./dashboard/entry/Entry";
+import Table from "./dashboard/table/Table";
 
 const App = () => {
   return (
@@ -29,6 +31,8 @@ const App = () => {
 
         <Route path="/auth/signup" element={<Signup />} />
         <Route path="/auth/login" element={<Login />} />
+        <Route path="/auth/entry" element={<Entry />} />
+        <Route path="/auth/dashboard" element={<Table />} />
       </Routes>
     </Router>
   );

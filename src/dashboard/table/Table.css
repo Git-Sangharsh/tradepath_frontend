@@ -1,0 +1,132 @@
+.table-container {
+  background-color: #0a0a0a;
+  color: #e0e0e0;
+  padding: 40px;
+  font-family: 'Segoe UI', sans-serif;
+  /* border-radius: 12px; */
+  max-width: 100%;
+  overflow-x: auto;
+  margin: 0 auto;
+  box-shadow: 0 0 30px rgba(0, 255, 100, 0.15);
+}
+
+.table-container h2 {
+  color: #00ff9f;
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #111;
+  border: 1px solid #1a1a1a;
+  min-width: 1000px;
+}
+
+.custom-table th,
+.custom-table td {
+  padding: 14px 18px;
+  border: 1px solid #1f1f1f;
+  text-align: left;
+  vertical-align: top;
+}
+
+.custom-table th {
+  background-color: #111;
+  color: #00ff9f;
+  font-weight: 600;
+}
+
+.custom-table td {
+  color: #ccc;
+}
+
+.win {
+  color: #00ff9f;
+  font-weight: bold;
+}
+
+.loss {
+  color: #ff4d4d;
+  font-weight: bold;
+}
+
+.long {
+  color: #2ecc71;
+  font-weight: bold;
+}
+
+.short {
+  color: #e74c3c;
+  font-weight: bold;
+}
+.confluences-cell {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.confluence-tag {
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+  color: #fff;
+}
+
+/* Theme matching background variants */
+.tag-0 { background-color: #00ff9f20; border: 1px solid #00ff9f; color: #00ff9f; }
+.tag-1 { background-color: #26c28120; border: 1px solid #26c281; color: #26c281; }
+.tag-2 { background-color: #3498db20; border: 1px solid #3498db; color: #3498db; }
+.tag-3 { background-color: #9b59b620; border: 1px solid #9b59b6; color: #9b59b6; }
+.tag-4 { background-color: #e67e2220; border: 1px solid #e67e22; color: #e67e22; }
+.tag-5 { background-color: #2ecc7120; border: 1px solid #2ecc71; color: #2ecc71; }
+.tag-6 { background-color: #1abc9c20; border: 1px solid #1abc9c; color: #1abc9c; }
+.tag-7 { background-color: #f39c1220; border: 1px solid #f39c12; color: #f39c12; }
+.custom-table tbody tr:hover {
+  background-color: #1a1a1a;
+  transition: background 0.2s ease-in-out;
+}
+.status-badge {
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 500;
+  text-align: center;
+  display: inline-block;
+}
+
+.status-win {
+  background-color: #00ff9f20;
+  color: #00ff9f;
+  border: 1px solid #00ff9f;
+}
+
+.status-loss {
+  background-color: #ff4d4d20;
+  color: #ff4d4d;
+  border: 1px solid #ff4d4d;
+}
+
+.status-calm {
+  background-color: #3498db20;
+  color: #3498db;
+  border: 1px solid #3498db;
+}
+.comment-cell {
+  max-width: max-content;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: help;
+}
+
+/* .custom-table thead th {
+  position: sticky;
+  top: 0;
+  background-color: #0a0a0a;
+  z-index: 1;
+} */

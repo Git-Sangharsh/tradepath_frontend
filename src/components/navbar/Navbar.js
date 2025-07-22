@@ -2,11 +2,13 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import ScrollIntoView from "react-scroll-into-view";
 import "./Navbar.css";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
+  const navigate = useNavigate();
+
   const [showNavbar, setShowNavbar] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
-
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,6 +27,10 @@ const Navbar = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
+
+  const AuthRoute = () => {
+    navigate('/auth/login')
+  };
 
   return (
     <AnimatePresence>
@@ -48,7 +54,7 @@ const Navbar = () => {
             </ScrollIntoView>
           </ul>
 
-          <div className="navbar-actions">
+          <div className="navbar-actions" onClick={AuthRoute}>
             <button className="cta-btn font-var-2">Get Started Now</button>
           </div>
 

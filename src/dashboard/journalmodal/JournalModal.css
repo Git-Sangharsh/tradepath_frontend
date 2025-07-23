@@ -119,7 +119,7 @@
 .modal-wrapper button[type="submit"] {
   background-color: #00ff9f;
   color: #0a0a0a;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .modal-wrapper button[type="submit"]:hover {
@@ -146,6 +146,21 @@
   font-weight: 500;
 }
 
+.confluence-label{
+  margin-bottom: 0;
+  /* border: 1px solid red; */
+}
+
 .select__multi-value__label css-uo46il{
   color: white;
+}
+
+
+.modal-submit{
+  border: 1px solid red;
+  background-color: red;
+    -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+      font-family: "Bebas Neue", sans-serif;
+    font-weight: 500;
 }

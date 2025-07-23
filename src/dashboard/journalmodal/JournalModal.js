@@ -4,6 +4,23 @@ import { motion, AnimatePresence } from "framer-motion";
 import Select from "react-select";
 import "./JournalModal.css";
 
+const assetOptions = [
+  { value: "NASDAQ", label: "NASDAQ" },
+  { value: "S&P 500", label: "S&P 500" },
+  { value: "BTC/USD", label: "BTC/USD" },
+  { value: "ETH/USD", label: "ETH/USD" },
+  { value: "XAU/USD", label: "XAU/USD" }, // Gold
+  { value: "USOIL", label: "USOIL" },
+  { value: "US30", label: "US30" },
+  { value: "EUR/USD", label: "EUR/USD" },
+  { value: "GBP/USD", label: "GBP/USD" },
+  { value: "USD/JPY", label: "USD/JPY" },
+  { value: "USD/CHF", label: "USD/CHF" },
+  { value: "AUD/USD", label: "AUD/USD" },
+  { value: "NZD/USD", label: "NZD/USD" },
+  { value: "USD/CAD", label: "USD/CAD" },
+];
+
 const confluenceOptions = [
   { value: "FVG", label: "FVG" },
   { value: "CHoCH", label: "CHoCH" },
@@ -32,6 +49,13 @@ const resultOptions = [
   { value: "break-even", label: "Break-even" },
 ];
 
+const setupsOptions = [
+  { value: "A+", label: "A+" },
+  { value: "A", label: "A" },
+  { value: "B", label: "B" },
+  { value: "C", label: "C" },
+];
+
 const JournalModal = ({ onSubmit }) => {
   const isOpen = useSelector((state) => state.showJournalModal);
   const dispatch = useDispatch();
@@ -45,7 +69,7 @@ const JournalModal = ({ onSubmit }) => {
     pnl: 0,
     comments: "",
     confluences_used: [],
-    emotions: "",
+    setups: "A+",
   });
 
   const handleChange = (e) => {
@@ -82,6 +106,8 @@ const JournalModal = ({ onSubmit }) => {
       boxShadow: isFocused ? "0 0 0 1px #00ff9f" : "none",
       color: "white",
       minHeight: "38px",
+        cursor: "pointer",
+
       ":hover": {
         borderColor: "#00ff9f",
       },
@@ -104,6 +130,7 @@ const JournalModal = ({ onSubmit }) => {
       ":hover": {
         backgroundColor: "#00ff9f",
         color: "black",
+        cursor: "pointer"
       },
     }),
     menu: (styles) => ({
@@ -120,6 +147,8 @@ const JournalModal = ({ onSubmit }) => {
         : "#0a0a0a",
       color: "white",
       cursor: "pointer",
+          transition: "none", // 🚫 disable hover/focus animation
+
       ":active": {
         backgroundColor: "#00ff9f55",
       },
@@ -169,14 +198,27 @@ const JournalModal = ({ onSubmit }) => {
                 required
               />
 
-              <input
-                type="text"
-                name="asset"
-                placeholder="Asset (e.g. BTC/USDT)"
-                onChange={handleChange}
-                required
-                className="font-var"
-              />
+              <div className="confluence-section">
+                <label className="confluence-label">Asset</label>
+                <Select
+                  name="asset"
+                  options={assetOptions}
+                  value={assetOptions.find(
+                    (option) => option.value === formData.asset
+                  )}
+                  onChange={(selectedOption) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      asset: selectedOption?.value || "",
+                    }))
+                  }
+                  className="basic-single-select"
+                  classNamePrefix="select"
+                  theme={selectTheme}
+                  styles={selectStyles}
+                  isMulti={false}
+                />
+              </div>
 
               <div className="select-group">
                 <label className="select-label">Direction</label>
@@ -226,20 +268,24 @@ const JournalModal = ({ onSubmit }) => {
                 />
               </div>
               <div className="select-group">
-                <label className="confluence-label"> Emotions</label>
-
-                <input
-                  type="text"
-                  name="emotions"
-                  placeholder="Emotion"
-                  onChange={handleChange}
-                  className="font-var"
+                <label className="select-label">Setups</label>
+                <Select
+                  name="result"
+                  options={setupsOptions}
+                  defaultValue={setupsOptions.find(
+                    (option) => option.value === formData.setups
+                  )}
+                  className="basic-select"
+                  classNamePrefix="select"
+                  onChange={handleSelectChange}
+                  theme={selectTheme}
+                  styles={selectStyles}
                 />
               </div>
               <div className="confluence-section">
                 <p className="select-label">Profit/Loss</p>
 
-                              <input
+                <input
                   type="number"
                   name="pnl"
                   placeholder="P&L"
@@ -269,7 +315,7 @@ const JournalModal = ({ onSubmit }) => {
                 className="font-var"
               />
 
-              <button className="font-var" type="submit">
+              <button className="modal-submit font-var" type="submit">
                 Submit Entry
               </button>
               <button

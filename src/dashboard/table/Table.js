@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import "./Table.css";
+import { useDispatch } from "react-redux";
 
 const Table = () => {
-    const [journals, setJournals] = useState([]);
+  const dispatch = useDispatch();
+  const [journals, setJournals] = useState([]);
 
   useEffect(() => {
     const fetchJournals = async () => {
@@ -18,51 +20,59 @@ const Table = () => {
             },
           }
         );
-        setJournals(res.data);
+        setJournals(res.data.entries);
+        // console.log(res.data.analysis);
+        dispatch({ type: "SET_ANALYSE_DATA", payload: res.data.analysis });
       } catch (err) {
         console.error("Error fetching journal data:", err);
       }
     };
 
     fetchJournals();
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="table-container">
-      <h2>Trade Summary</h2>
+      {/* <h2>Trade Summary</h2> */}
       <table className="custom-table">
         <thead>
           <tr>
-            <th>Date</th>
-            <th>Direction</th>
-            <th>Asset</th>
-            <th>Session</th>
-            <th>Result</th>
-            <th>PnL ($)</th>
-            <th>Confluences Used</th>
-            <th>Emotions</th>
-            <th>Comments</th>
+            <th className="font-var">Date</th>
+            <th className="font-var">Direction</th>
+            <th className="font-var">Asset</th>
+            <th className="font-var">Session</th>
+            <th className="font-var">Result</th>
+            <th className="font-var">PnL ($)</th>
+            <th className="font-var">Confluences Used</th>
+            <th className="font-var">Setups</th>
+            <th className="font-var">Comments</th>
           </tr>
         </thead>
         <tbody>
           {journals.map((data, i) => (
             <tr key={i}>
-              <td>
+              <td className="font-var">
                 {new Date(data.date).toLocaleDateString()} <br />
                 {/* <small className="session-tag">{data.session}</small> */}
               </td>
-              <td className={data.direction === "long" ? "long" : "short"}>
+              <td
+                className={
+                  data.direction === "long" ? "long font-var" : "short font-var"
+                }
+              >
                 {data.direction.toUpperCase()}
               </td>
-              <td>{data.asset}</td>
-              <td>{data.session}</td>
+              <td className="font-var">{data.asset}</td>
+              <td className="font-var">{data.session}</td>
               <td>
-                <span className={`status-badge status-${data.result}`}>
+                <span className={`status-badge font-var status-${data.result}`}>
                   {data.result.toUpperCase()}
                 </span>
               </td>
-              <td className={data.pnl >= 0 ? "win" : "loss"}>${data.pnl}</td>
-              <td className="confluences-cell">
+              <td className={data.pnl >= 0 ? "win font-var" : "loss font-var"}>
+                ${data.pnl}
+              </td>
+              <td className="confluences-cell font-var">
                 {data.confluences_used.map((item, index) => (
                   <span
                     key={index}
@@ -74,12 +84,12 @@ const Table = () => {
               </td>
               <td>
                 <span
-                  className={`status-badge status-${data.emotions.toLowerCase()}`}
+                  className={`status-badge font-var status-${data.setups.toLowerCase()}`}
                 >
-                  {data.emotions}
+                  {data.setups}
                 </span>
               </td>
-              <td className="comment-cell" title={data.comments}>
+              <td className="comment-cell font-var" title={data.comments}>
                 {data.comments}
               </td>
             </tr>

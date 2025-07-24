@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { motion, AnimatePresence } from "framer-motion";
 import Select from "react-select";
+import axios from "axios";
 import "./JournalModal.css";
 
 const assetOptions = [
@@ -88,11 +89,34 @@ const JournalModal = ({ onSubmit }) => {
     setFormData((prev) => ({ ...prev, confluences_used: values }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    onSubmit(formData);
-    dispatch({ type: "SET_JOURNAL_MODAL", payload: false });
+  const handleSubmit = async (e) => {
+    e.preventDefault(); // prevent default at the top
+
+    try {
+      const token = localStorage.getItem("token"); // assuming you're storing JWT in localStorage
+
+      const res = await axios.post(
+        `${process.env.REACT_APP_API_URL}/api/journal/journal`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      console.log("Journal entry added:", res.data);
+      // Close modal
+      dispatch({ type: "SET_JOURNAL_MODAL", payload: false });
+    } catch (err) {
+      console.error(
+        "Error while adding entry:",
+        err.response?.data || err.message
+      );
+    }
   };
+
 
   const handleClose = () => {
     dispatch({ type: "SET_JOURNAL_MODAL", payload: false });
@@ -106,7 +130,7 @@ const JournalModal = ({ onSubmit }) => {
       boxShadow: isFocused ? "0 0 0 1px #00ff9f" : "none",
       color: "white",
       minHeight: "38px",
-        cursor: "pointer",
+      cursor: "pointer",
 
       ":hover": {
         borderColor: "#00ff9f",
@@ -130,7 +154,7 @@ const JournalModal = ({ onSubmit }) => {
       ":hover": {
         backgroundColor: "#00ff9f",
         color: "black",
-        cursor: "pointer"
+        cursor: "pointer",
       },
     }),
     menu: (styles) => ({
@@ -147,7 +171,7 @@ const JournalModal = ({ onSubmit }) => {
         : "#0a0a0a",
       color: "white",
       cursor: "pointer",
-          transition: "none", // 🚫 disable hover/focus animation
+      transition: "none", // 🚫 disable hover/focus animation
 
       ":active": {
         backgroundColor: "#00ff9f55",
@@ -171,6 +195,8 @@ const JournalModal = ({ onSubmit }) => {
       neutral30: "#555",
     },
   });
+
+  console.log(formData.date, formData.asset, formData.direction, formData.session, formData.result, formData.setups, formData.pnl, formData.confluences_used, formData.comments)
 
   return (
     <AnimatePresence>
@@ -270,7 +296,7 @@ const JournalModal = ({ onSubmit }) => {
               <div className="select-group">
                 <label className="select-label">Setups</label>
                 <Select
-                  name="result"
+                  name="setups"
                   options={setupsOptions}
                   defaultValue={setupsOptions.find(
                     (option) => option.value === formData.setups

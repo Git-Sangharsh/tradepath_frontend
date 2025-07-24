@@ -3,6 +3,7 @@ import { configureStore } from "@reduxjs/toolkit";
 // Minimal initial state
 const initialState = {
   showJournalModal: false,
+  analyseData: null
 };
 
 // Minimal reducer
@@ -12,6 +13,8 @@ const Reducer = (state = initialState, action) => {
       return { ...state, showJournalModal: !state.showJournalModal };
     case "SET_JOURNAL_MODAL":
       return { ...state, showJournalModal: action.payload };
+    case "SET_ANALYSE_DATA":
+      return {...state, analyseData: action.payload}
     default:
       return state;
   }

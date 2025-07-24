@@ -10,6 +10,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Entry from "./dashboard/entry/Entry";
 import Table from "./dashboard/table/Table";
 import JournalModal from "./dashboard/journalmodal/JournalModal";
+import Analyse from "./dashboard/analyse/Analyse";
 
 const App = () => {
   return (
@@ -34,7 +35,15 @@ const App = () => {
         <Route path="/auth/signup" element={<Signup />} />
         <Route path="/auth/login" element={<Login />} />
         <Route path="/auth/entry" element={<Entry />} />
-        <Route path="/auth/dashboard" element={<Table />} />
+        <Route
+          path="/auth/dashboard"
+          element={
+            <>
+              <Table />
+              <Analyse />
+            </>
+          }
+        />
       </Routes>
     </Router>
   );

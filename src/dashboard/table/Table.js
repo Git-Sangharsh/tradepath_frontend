@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import "./Table.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const Table = () => {
   const dispatch = useDispatch();
+  const journalData = useSelector(state => state.journalData)
   const [journals, setJournals] = useState([]);
 
   useEffect(() => {
@@ -21,8 +22,10 @@ const Table = () => {
           }
         );
         setJournals(res.data.entries);
-        // console.log(res.data.analysis);
+        // console.log(res.data.entries);
+
         dispatch({ type: "SET_ANALYSE_DATA", payload: res.data.analysis });
+        dispatch({type: "SET_JOURNAL_DATA", payload: res.data.entries});
       } catch (err) {
         console.error("Error fetching journal data:", err);
       }
@@ -30,6 +33,8 @@ const Table = () => {
 
     fetchJournals();
   }, [dispatch]);
+
+  console.log(journalData)
 
   return (
     <div className="table-container">
@@ -84,7 +89,8 @@ const Table = () => {
               </td>
               <td>
                 <span
-                  className={`status-badge font-var status-${data.setups.toLowerCase()}`}
+                  // className={`status-badge font-var status-${data.setups.toLowerCase()}`}
+                  className={`status-badge font-var status-${data.setups}`}
                 >
                   {data.setups}
                 </span>

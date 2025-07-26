@@ -11,6 +11,7 @@ import Entry from "./dashboard/entry/Entry";
 import Table from "./dashboard/table/Table";
 import JournalModal from "./dashboard/journalmodal/JournalModal";
 import Analyse from "./dashboard/analyse/Analyse";
+import TradeCalendar from "./dashboard/tradecalendar/TradeCalendar";
 
 const App = () => {
   return (
@@ -41,6 +42,7 @@ const App = () => {
             <>
               <Table />
               <Analyse />
+              <TradeCalendar />
             </>
           }
         />

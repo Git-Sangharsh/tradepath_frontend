@@ -1,14 +1,47 @@
 import React from "react";
 import "./RecentTrades.css";
 import { useSelector } from "react-redux";
+import { motion } from "framer-motion";
+
+// Animation Variants
+const containerVariants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.08,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 10 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.4,
+      ease: "easeOut",
+    },
+  },
+};
 
 const RecentTrades = () => {
   const journalData = useSelector((state) => state.journalData);
 
+  if (!journalData || journalData.length === 0) {
+    return <div className="recent-trades-container">No recent trades.</div>;
+  }
+
   return (
     <div className="recent-trades-container">
       <div className="calendar-header">Recent Trades</div>
-      <div className="recent-trades-grid">
+      <motion.div
+        className="recent-trades-grid"
+        variants={containerVariants}
+        initial="hidden"
+        animate="show"
+      >
         {journalData
           .slice()
           .reverse()
@@ -17,13 +50,16 @@ const RecentTrades = () => {
             const formattedPNL =
               trade.pnl >= 0
                 ? `+$${trade.pnl.toFixed(2)}`
-                : `-$${Math.abs(trade.pnl).toFixed(2)}`;
+                : `-$${Math.abs(trade.pnl.toFixed(2))}`;
 
             return (
-              <div key={index} className={`recent-trade-cell ${pnlClass}`}>
+              <motion.div
+                key={index}
+                className={`recent-trade-cell ${pnlClass}`}
+                variants={itemVariants}
+              >
                 <div className="trade-asset">
                   <div className="trade-pnl">{formattedPNL}</div>
-
                   {trade.asset}
                   <div className="trade-date">
                     {new Date(trade.date).toLocaleDateString("en-US", {
@@ -33,10 +69,10 @@ const RecentTrades = () => {
                     })}
                   </div>
                 </div>
-              </div>
+              </motion.div>
             );
           })}
-      </div>
+      </motion.div>
     </div>
   );
 };

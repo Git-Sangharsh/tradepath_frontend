@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import "./Table.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch} from "react-redux";
 
 const Table = () => {
   const dispatch = useDispatch();
-  const journalData = useSelector(state => state.journalData)
+  // const journalData = useSelector(state => state.journalData)
   const [journals, setJournals] = useState([]);
 
   useEffect(() => {
@@ -34,7 +34,7 @@ const Table = () => {
     fetchJournals();
   }, [dispatch]);
 
-  console.log(journalData)
+  // console.log(journalData)
 
   return (
     <div className="table-container">

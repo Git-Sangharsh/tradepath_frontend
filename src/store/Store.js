@@ -4,7 +4,8 @@ import { configureStore } from "@reduxjs/toolkit";
 const initialState = {
   showJournalModal: false,
   analyseData: null,
-  journalData: []
+  journalData: [],
+  isAuthenticated: false
 };
 
 // Minimal reducer
@@ -18,6 +19,8 @@ const Reducer = (state = initialState, action) => {
       return {...state, analyseData: action.payload};
     case "SET_JOURNAL_DATA":
       return {...state, journalData: action.payload};
+    case "SET_IS_AUTHENTICATED":
+      return {...state, isAuthenticated: action.payload};
     default:
       return state;
   }

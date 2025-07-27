@@ -1,13 +1,17 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import ScrollIntoView from "react-scroll-into-view";
+// import ScrollIntoView from "react-scroll-into-view";
 import "./Navbar.css";
 import { useNavigate } from "react-router-dom";
-            import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const Navbar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const isAuthenticated = useSelector((state) => state.isAuthenticated);
+
+  // console.log(isAuthenticated, "is authenticated is ");
 
   const [showNavbar, setShowNavbar] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
@@ -31,7 +35,7 @@ const Navbar = () => {
   }, [lastScrollY]);
 
   const AuthRoute = () => {
-    navigate('/auth/login')
+    navigate("/auth/login");
   };
 
   return (
@@ -44,26 +48,32 @@ const Navbar = () => {
           transition={{ duration: 0.4, ease: "easeOut" }}
           className="navbar"
         >
-
           <div className="navbar-logo">
-            <span className="logo-text">TRADEPATH</span>
-               <button onClick={() => dispatch({ type: "TOGGLE_JOURNAL_MODAL", payload: true })}>
-      Add Journal Entry
-    </button>
-
+            {/* <span className="logo-text">TRADEPATH</span> */}
+            <span className="logo-text">TRADESENSE</span>
+            <button
+              onClick={() =>
+                dispatch({ type: "TOGGLE_JOURNAL_MODAL", payload: true })
+              }
+            >
+              Add Journal Entry
+            </button>
           </div>
-
+          {/*
           <ul className="navbar-menu font-var-2">
             <li className="active">Home</li>
             <ScrollIntoView selector="#features">
               <li>Features</li>
             </ScrollIntoView>
-          </ul>
+          </ul> */}
 
           <div className="navbar-actions" onClick={AuthRoute}>
-            <button className="cta-btn font-var-2">Get Started Now</button>
+            {isAuthenticated ? (
+              <button className="cta-btn font-var-2">LOG OUT</button>
+            ) : (
+              <button className="cta-btn font-var-2">Get Started Now</button>
+            )}
           </div>
-
         </motion.nav>
       )}
     </AnimatePresence>

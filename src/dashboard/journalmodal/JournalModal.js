@@ -196,7 +196,7 @@ const JournalModal = ({ onSubmit }) => {
     },
   });
 
-  console.log(formData.date, formData.asset, formData.direction, formData.session, formData.result, formData.setups, formData.pnl, formData.confluences_used, formData.comments)
+  // console.log(formData.date, formData.asset, formData.direction, formData.session, formData.result, formData.setups, formData.pnl, formData.confluences_used, formData.comments)
 
   return (
     <AnimatePresence>

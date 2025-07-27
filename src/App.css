@@ -32,3 +32,12 @@ body::-webkit-scrollbar {
 html {
   scroll-behavior: smooth;
 }
+
+
+.dashboard-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column; /* or 'row' depending on layout */
+  background: linear-gradient(to bottom right, #0b2918, #000);
+
+}

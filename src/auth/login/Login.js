@@ -79,7 +79,7 @@ const submitBtn = async () => {
         </motion.div>
 
         <div className="video-wrapper">
-          <video src={AuthAsset} autoPlay muted loop playsInline />
+          <video src={AuthAsset} autoPlay muted  playsInline />
         </div>
       </div>
     </div>

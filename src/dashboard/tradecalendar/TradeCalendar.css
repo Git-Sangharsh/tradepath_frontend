@@ -226,6 +226,12 @@
   .add-btn {
     padding: 10px;
     font-size: 0.9rem;
+    display: flex;
+        position: static !important;
+    bottom: unset !important;
+    left: unset !important;
+    transform: unset !important;
+    width: 100% !important;
   }
 }
 

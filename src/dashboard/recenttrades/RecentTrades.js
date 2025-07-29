@@ -53,9 +53,9 @@ const RecentTrades = () => {
   // console.log(journalData[0]);
   // console.log(journalData[journalData.length - 1]);
 
-  if (!journalData || journalData.length === 0) {
-    return <div className="recent-trades-container">No recent trades.</div>;
-  }
+  // if (!journalData || journalData.length === 0) {
+  //   return <div className="recent-trades-container">No recent trades.</div>;
+  // }
 
   const handleAddTrade = () => {
     dispatch({ type: "TOGGLE_JOURNAL_MODAL", payload: true });
@@ -73,6 +73,7 @@ const RecentTrades = () => {
         {journalData
           .slice()
           .reverse()
+          .slice(0, 10)
           .map((trade, index) => {
             const pnlClass = trade.pnl >= 0 ? "pnl-profit" : "pnl-loss";
 
@@ -99,9 +100,11 @@ const RecentTrades = () => {
             );
           })}
       </motion.div>
-      <div onClick={handleAddTrade} className="add-btn">
-        ADD Trade
-      </div>
+      {journalData && journalData.length > 0 && (
+        <div onClick={handleAddTrade} className="add-btn">
+          ADD Trade
+        </div>
+      )}
     </div>
   );
 };

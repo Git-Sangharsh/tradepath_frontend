@@ -14,7 +14,7 @@ const Table = () => {
 
       try {
         const res = await axios.get(
-          "http://localhost:5000/api/journal/get-journal",
+        `${process.env.REACT_APP_API_URL}/api/journal/get-journal`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

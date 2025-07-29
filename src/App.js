@@ -59,13 +59,14 @@ const App = () => {
                 <Navbar />
                 <ScrollIndicator />
                 <TradeCalendar />
-                <Cards /> 
+                <Cards />
                 <Table />
                 <Analyse />
                 <JournalModal />
               </div>
             ) : (
               <div className="app">
+                <Navbar />
                 <Hero />
                 <section id="features">
                   <Features />

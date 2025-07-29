@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { motion, useMotionValue, animate } from "framer-motion";
 import "./RecentTrades.css";
-import { useSelector } from "react-redux";
-import { motion } from "framer-motion";
 
 // Animation Variants
 const containerVariants = {
@@ -26,12 +26,40 @@ const itemVariants = {
   },
 };
 
+const AnimatedNumber = ({ value }) => {
+  const motionValue = useMotionValue(0);
+  const [displayValue, setDisplayValue] = useState(0);
+
+  useEffect(() => {
+    const controls = animate(motionValue, value, {
+      duration: 3,
+      onUpdate: (v) => setDisplayValue(v.toFixed(2)),
+    });
+
+    return () => controls.stop();
+  }, [value, motionValue]);
+
+  return (
+    <span>
+      {value >= 0 ? `+$${displayValue}` : `-$${Math.abs(displayValue)}`}
+    </span>
+  );
+};
+
 const RecentTrades = () => {
+  const dispatch = useDispatch();
   const journalData = useSelector((state) => state.journalData);
+
+  // console.log(journalData[0]);
+  // console.log(journalData[journalData.length - 1]);
 
   if (!journalData || journalData.length === 0) {
     return <div className="recent-trades-container">No recent trades.</div>;
   }
+
+  const handleAddTrade = () => {
+    dispatch({ type: "TOGGLE_JOURNAL_MODAL", payload: true });
+  };
 
   return (
     <div className="recent-trades-container">
@@ -47,10 +75,6 @@ const RecentTrades = () => {
           .reverse()
           .map((trade, index) => {
             const pnlClass = trade.pnl >= 0 ? "pnl-profit" : "pnl-loss";
-            const formattedPNL =
-              trade.pnl >= 0
-                ? `+$${trade.pnl.toFixed(2)}`
-                : `-$${Math.abs(trade.pnl.toFixed(2))}`;
 
             return (
               <motion.div
@@ -59,7 +83,9 @@ const RecentTrades = () => {
                 variants={itemVariants}
               >
                 <div className="trade-asset">
-                  <div className="trade-pnl">{formattedPNL}</div>
+                  <div className="trade-pnl">
+                    <AnimatedNumber value={trade.pnl} />
+                  </div>
                   {trade.asset}
                   <div className="trade-date">
                     {new Date(trade.date).toLocaleDateString("en-US", {
@@ -73,6 +99,9 @@ const RecentTrades = () => {
             );
           })}
       </motion.div>
+      <div onClick={handleAddTrade} className="add-btn">
+        ADD Trade
+      </div>
     </div>
   );
 };

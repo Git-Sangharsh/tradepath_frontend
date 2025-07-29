@@ -3,10 +3,32 @@ import { useSelector } from "react-redux";
 import "./TradeCalendar.css";
 import RecentTrades from "../recenttrades/RecentTrades";
 import { motion } from "framer-motion";
+import { useMotionValue, animate, useTransform } from "framer-motion";
+
+const AnimatedPNL = ({ target }) => {
+  const motionVal = useMotionValue(0);
+  const rounded = useTransform(motionVal, (latest) => {
+    return target >= 0
+      ? `$${latest.toFixed(2)}`
+      : `-$${Math.abs(latest).toFixed(2)}`;
+  });
+
+  useEffect(() => {
+    const controls = animate(motionVal, target, {
+      duration: 3,
+      ease: "easeOut",
+    });
+    return controls.stop;
+  }, [target, motionVal]);
+
+  return <motion.span>{rounded}</motion.span>;
+};
 
 const TradeCalendar = () => {
   const journalData = useSelector((state) => state.journalData || []);
+
   const [animatedTradeMap, setAnimatedTradeMap] = useState({});
+
   const today = new Date();
   const currentMonth = today.getMonth();
   const currentYear = today.getFullYear();
@@ -41,13 +63,15 @@ const TradeCalendar = () => {
   useEffect(() => {
     if (Object.keys(tradeMap).length > 0) {
       // Stagger the animation of trade data appearing
-      const days = Object.keys(tradeMap).sort((a, b) => parseInt(a) - parseInt(b));
+      const days = Object.keys(tradeMap).sort(
+        (a, b) => parseInt(a) - parseInt(b)
+      );
 
       days.forEach((day, index) => {
         setTimeout(() => {
-          setAnimatedTradeMap(prev => ({
+          setAnimatedTradeMap((prev) => ({
             ...prev,
-            [day]: tradeMap[day]
+            [day]: tradeMap[day],
           }));
         }, index * 50); // 50ms delay between each day
       });
@@ -80,26 +104,28 @@ const TradeCalendar = () => {
           background: "transparent",
           borderColor: "rgba(255, 255, 255, 0.06)",
           color: "#4affc1cc",
-          boxShadow: "inset 0 0 4px rgba(0, 255, 159, 0.05)"
+          boxShadow: "inset 0 0 4px rgba(0, 255, 159, 0.05)",
         },
         win: {
           background: "linear-gradient(145deg, #0b2918, #000)",
           borderColor: "#00ff9991",
           color: "#00ff99",
-          boxShadow: "0 0 12px rgba(0, 255, 153, 0.4), inset 0 0 6px rgba(0, 255, 153, 0.3)"
+          boxShadow:
+            "0 0 12px rgba(0, 255, 153, 0.4), inset 0 0 6px rgba(0, 255, 153, 0.3)",
         },
         loss: {
           background: "linear-gradient(145deg, #260000, #000)",
           borderColor: "#ff4d5069",
           color: "#ff4d4f",
-          boxShadow: "0 0 12px rgba(255, 77, 79, 0.4), inset 0 0 6px rgba(255, 77, 79, 0.3)"
+          boxShadow:
+            "0 0 12px rgba(255, 77, 79, 0.4), inset 0 0 6px rgba(255, 77, 79, 0.3)",
         },
         neutral: {
           background: "rgba(255, 255, 255, 0.1)",
           borderColor: "rgba(255, 255, 255, 0.06)",
           color: "#4affc155",
-          boxShadow: "inset 0 0 4px rgba(0, 255, 159, 0.05)"
-        }
+          boxShadow: "inset 0 0 4px rgba(0, 255, 159, 0.05)",
+        },
       };
 
       cells.push(
@@ -110,7 +136,7 @@ const TradeCalendar = () => {
           animate={{
             opacity: 1,
             scale: 1,
-            ...colorVariants[cellClass || 'default']
+            ...colorVariants[cellClass || "default"],
           }}
           transition={{
             duration: 0.3,
@@ -119,7 +145,7 @@ const TradeCalendar = () => {
             background: { duration: 0.5, ease: "easeInOut" },
             borderColor: { duration: 0.5, ease: "easeInOut" },
             color: { duration: 0.5, ease: "easeInOut" },
-            boxShadow: { duration: 0.5, ease: "easeInOut" }
+            boxShadow: { duration: 0.5, ease: "easeInOut" },
           }}
         >
           <div className="day-number">{day}</div>
@@ -130,9 +156,7 @@ const TradeCalendar = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, delay: 0.2 }}
             >
-              {trade.pnl >= 0
-                ? `$${trade.pnl.toFixed(2)}`
-                : `-$${Math.abs(trade.pnl).toFixed(2)}`}
+              <AnimatedPNL target={trade.pnl} />
             </motion.div>
           )}
         </motion.div>

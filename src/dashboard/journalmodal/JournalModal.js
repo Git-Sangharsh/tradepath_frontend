@@ -107,6 +107,7 @@ const JournalModal = ({ onSubmit }) => {
       );
 
       console.log("Journal entry added:", res.data);
+      console.log("setups are ",formData.setups)
       // Close modal
       dispatch({ type: "SET_JOURNAL_MODAL", payload: false });
     } catch (err) {

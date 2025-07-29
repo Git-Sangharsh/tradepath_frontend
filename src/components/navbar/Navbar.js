@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 // import ScrollIntoView from "react-scroll-into-view";
 import "./Navbar.css";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -38,6 +38,11 @@ const Navbar = () => {
     navigate("/auth/login");
   };
 
+  const handleLogout = () => {
+    dispatch({ type: "SET_IS_AUTHENTICATED", payload: false });
+    navigate("/auth/login");
+  };
+
   return (
     <AnimatePresence>
       {showNavbar && (
@@ -51,13 +56,13 @@ const Navbar = () => {
           <div className="navbar-logo">
             {/* <span className="logo-text">TRADEPATH</span> */}
             <span className="logo-text">TRADESENSE</span>
-            <button
+            {/* <button
               onClick={() =>
                 dispatch({ type: "TOGGLE_JOURNAL_MODAL", payload: true })
               }
             >
               Add Journal Entry
-            </button>
+            </button> */}
           </div>
           {/*
           <ul className="navbar-menu font-var-2">
@@ -67,11 +72,15 @@ const Navbar = () => {
             </ScrollIntoView>
           </ul> */}
 
-          <div className="navbar-actions" onClick={AuthRoute}>
+          <div className="navbar-actions">
             {isAuthenticated ? (
-              <button className="cta-btn font-var-2">LOG OUT</button>
+              <button className="cta-btn font-var-2" onClick={handleLogout}>
+                LOG OUT
+              </button>
             ) : (
-              <button className="cta-btn font-var-2">Get Started Now</button>
+              <button className="cta-btn font-var-2" onClick={AuthRoute}>
+                Get Started Now
+              </button>
             )}
           </div>
         </motion.nav>

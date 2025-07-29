@@ -21,31 +21,31 @@ const Cards = () => {
     maxDrawdown: 0,
   });
 
-  useEffect(() => {
-    const animateValue = (key, endValue) => {
-      const duration = 1000;
-      const startTime = performance.now();
+useEffect(() => {
+  const animateValue = (key, endValue) => {
+    const duration = 3000;
+    const startTime = performance.now();
 
-      const animate = (currentTime) => {
-        const elapsed = currentTime - startTime;
-        const progress = Math.min(elapsed / duration, 1);
-        const current = Math.floor(progress * endValue);
+    const animate = (currentTime) => {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const current = Math.floor(progress * endValue);
 
-        setAnimated((prev) => ({ ...prev, [key]: current }));
+      setAnimated((prev) => ({ ...prev, [key]: current }));
 
-        if (progress < 1) {
-          requestAnimationFrame(animate);
-        }
-      };
-
-      requestAnimationFrame(animate);
+      if (progress < 1) {
+        requestAnimationFrame(animate);
+      }
     };
 
-    animateValue('winPercentage', parseInt(winPercentage));
-    animateValue('totalPnL', totalPnL);
-    animateValue('maxProfit', maxProfit);
-    animateValue('maxDrawdown', Math.abs(maxDrawdown));
-  }, [winPercentage, totalPnL, maxProfit, maxDrawdown]);
+    requestAnimationFrame(animate);
+  };
+
+  animateValue('winPercentage', parseInt(winPercentage));
+  animateValue('totalPnL', totalPnL);
+  animateValue('maxProfit', maxProfit);
+  animateValue('maxDrawdown', Math.abs(maxDrawdown));
+}, [winPercentage, totalPnL, maxProfit, maxDrawdown]);
 
   const containerVariants = {
     hidden: {},

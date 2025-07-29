@@ -1,6 +1,6 @@
 .recent-trades-container {
   /* background: linear-gradient(to bottom right, #0B2918, #000); */
-  padding: 16px;
+  padding: 1rem;
   color: #fff;
   border: 1px solid #00ff9f22;
   width: max-content;
@@ -8,7 +8,36 @@
   width: 100%;
   /* height: min-content; */
   height: 100% !important;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
+
+.add-btn {
+  background-color: red;
+  flex-grow: 1;
+}
+
+.add-btn {
+  background: linear-gradient(to right, #00ff99, #00cc88);
+  color: #000;
+  text-align: center;
+  padding: 12px;
+  border: 1px solid #00ff99;
+  box-shadow: 0 0 15px rgba(0, 255, 153, 0.5), inset 0 0 8px rgba(0, 255, 153, 0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  text-transform: uppercase;
+  flex-grow: 1;
+}
+
+.add-btn:hover {
+  background: linear-gradient(to right, #00cc88, #00ff99);
+  box-shadow: 0 0 20px rgba(0, 255, 153, 0.8), inset 0 0 10px rgba(0, 255, 153, 0.4);
+  color: black;
+}
+
 
 .recent-trades-title {
   font-size: 1.2rem;

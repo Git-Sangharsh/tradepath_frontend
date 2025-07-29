@@ -4,13 +4,14 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import axios from "axios";
+import { useDispatch } from "react-redux";
 
 const Login = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-
 
   const handleEmail = (e) => {
     setEmail(e.target.value);
@@ -24,28 +25,31 @@ const Login = () => {
     navigate("/auth/signup");
   };
 
+  const submitBtn = async () => {
+    try {
+      const res = await axios.post(
+        `${process.env.REACT_APP_API_URL}/api/auth/login`,
+        {
+          email,
+          password,
+        }
+      );
 
-const submitBtn = async () => {
-  try {
-    const res = await axios.post(
-      `${process.env.REACT_APP_API_URL}/api/auth/login`,
-      {
-        email,
-        password,
-      }
-    );
+      // Store the token BEFORE navigating
+      localStorage.setItem("token", res.data.token);
 
-    // Store the token BEFORE navigating
-    localStorage.setItem("token", res.data.token);
+      // console.log("Login successful:", res.data);
 
-    console.log("Login successful:", res.data);
-
-    // Navigate after login
-    navigate("/");
-  } catch (err) {
-    console.error("Error found while logging in:", err.response?.data || err.message);
-  }
-};
+      // Navigate after login
+      navigate("/");
+      dispatch({ type: "SET_IS_AUTHENTICATED", payload: true });
+    } catch (err) {
+      console.error(
+        "Error found while logging in:",
+        err.response?.data || err.message
+      );
+    }
+  };
 
   return (
     <div className="auth-container">
@@ -72,14 +76,16 @@ const submitBtn = async () => {
             className="auth-input font-var-2"
             onChange={handlePassword}
           />
-          <button className="auth-btn font-var-2" onClick={submitBtn}>Login</button>
+          <button className="auth-btn font-var-2" onClick={submitBtn}>
+            Login
+          </button>
           <h6 className="auth-link font-var-2" onClick={SignupRoute}>
             Sign up and get started today!
           </h6>
         </motion.div>
 
         <div className="video-wrapper">
-          <video src={AuthAsset} autoPlay muted  playsInline />
+          <video src={AuthAsset} autoPlay muted playsInline />
         </div>
       </div>
     </div>

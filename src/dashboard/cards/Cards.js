@@ -102,7 +102,7 @@ useEffect(() => {
             <span>Max Drawdown</span>
             <Info size={16} />
           </div>
-          <div className="card-value font-var text-red-500">-${animated.maxDrawdown}</div>
+          <div className="card-value font-var max-drawdown">-${animated.maxDrawdown}</div>
         </motion.div>
       </div>
     </motion.div>

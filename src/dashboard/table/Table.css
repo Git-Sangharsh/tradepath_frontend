@@ -116,3 +116,39 @@
 
 
 
+/* Mobile-first: Apply base styles first (you already have them) */
+
+/* Tablet and below (≤ 768px) */
+@media (max-width: 768px) {
+  .table-container {
+    padding: 12px;
+  }
+
+  .custom-table {
+    font-size: 0.85rem;
+  }
+
+  .custom-table th,
+  .custom-table td {
+    padding: 8px 12px;
+  }
+
+  .comment-cell {
+    max-width: 120px;
+  }
+}
+
+/* Mobile (≤ 480px): Collapse table into blocks or horizontal scroll */
+@media (max-width: 768px) {
+  .custom-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+    width: 100%;
+  }
+
+  .custom-table th,
+  .custom-table td {
+    min-width: 120px; /* Force column width */
+  }
+}

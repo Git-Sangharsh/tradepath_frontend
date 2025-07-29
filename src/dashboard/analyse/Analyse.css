@@ -2,7 +2,7 @@
 
   background-color: #0A0A0A;
   color: whitesmoke;
-  padding: 24px;
+  padding: 1rem;
   box-shadow: 0 6px 16px rgba(0, 255, 159, 0.05);
   background: linear-gradient(to bottom, #0B2918, #000000);
 
@@ -13,7 +13,7 @@
   background: linear-gradient(to bottom, #0B2918, #000000);
 
   background-color: transparent;
-  padding: 1rem;
+  padding: 0rem 1rem;
   /* border-radius: 16px; */
   /* box-shadow: 0 0 12px #00ff9f22; */
   /* max-width: 800px; */
@@ -116,4 +116,341 @@
   padding: 2px 6px;
   border-radius: 4px;
   font-size: 0.9rem;
+}
+/* ================================
+   ANALYSE COMPONENT MEDIA QUERIES
+   ================================ */
+
+/* Small Devices (Mobile phones) - 320px to 768px */
+@media screen and (max-width: 768px) {
+  .analyse-container {
+    padding: 12px;
+    background: linear-gradient(to bottom, #0B2918, #000000);
+    box-shadow: 0 3px 8px rgba(0, 255, 159, 0.03);
+  }
+
+  .analyse-wrapper {
+    padding: 0.8rem;
+    margin: 1rem auto;
+  }
+
+  .analyse-heading {
+    font-size: 18px;
+    margin-bottom: 15px;
+    padding: 8px;
+  }
+
+  .analyse-content {
+    font-size: 14px;
+    line-height: 1.5;
+    max-height: 350px;
+    padding-right: 4px;
+  }
+
+  .analyse-content::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .analyse-content p {
+    margin-bottom: 12px;
+  }
+
+  .analyse-content ul {
+    padding-left: 16px;
+    margin-bottom: 12px;
+  }
+
+  .analyse-content li {
+    margin-bottom: 8px;
+    font-size: 13px;
+  }
+
+  .analyse-content h1,
+  .analyse-content h2,
+  .analyse-content h3,
+  .analyse-content h4,
+  .analyse-content h5,
+  .analyse-content h6 {
+    margin: 0.8rem 0;
+    font-size: 1rem;
+    padding-left: 8px;
+    border-left: 2px solid #00ff9f55;
+  }
+
+  .analyse-content blockquote {
+    margin: 0.8rem 0;
+    padding: 0.4rem 0.8rem;
+    font-size: 13px;
+  }
+
+  .analyse-content code {
+    padding: 1px 4px;
+    font-size: 0.8rem;
+  }
+
+  .analyse-empty {
+    margin-top: 20px;
+    font-size: 14px;
+  }
+}
+
+/* Very Small Mobile Devices - 320px to 480px */
+@media screen and (max-width: 480px) {
+  .analyse-container {
+    padding: 8px;
+  }
+
+  .analyse-wrapper {
+    padding: 0.6rem;
+    margin: 0.5rem auto;
+  }
+
+  .analyse-heading {
+    font-size: 16px;
+    margin-bottom: 12px;
+    padding: 6px;
+  }
+
+  .analyse-content {
+    font-size: 13px;
+    line-height: 1.4;
+    max-height: 300px;
+    padding-right: 2px;
+  }
+
+  .analyse-content::-webkit-scrollbar {
+    width: 3px;
+  }
+
+  .analyse-content p {
+    margin-bottom: 10px;
+  }
+
+  .analyse-content ul {
+    padding-left: 14px;
+    margin-bottom: 10px;
+  }
+
+  .analyse-content li {
+    margin-bottom: 6px;
+    font-size: 12px;
+  }
+
+  .analyse-content h1,
+  .analyse-content h2,
+  .analyse-content h3,
+  .analyse-content h4,
+  .analyse-content h5,
+  .analyse-content h6 {
+    margin: 0.6rem 0;
+    font-size: 0.9rem;
+    padding-left: 6px;
+  }
+
+  .analyse-content blockquote {
+    margin: 0.6rem 0;
+    padding: 0.3rem 0.6rem;
+    font-size: 12px;
+  }
+
+  .analyse-content code {
+    padding: 1px 3px;
+    font-size: 0.75rem;
+  }
+
+  .analyse-empty {
+    margin-top: 15px;
+    font-size: 13px;
+  }
+}
+
+/* Mobile Landscape */
+@media screen and (max-width: 768px) and (orientation: landscape) {
+  .analyse-container {
+    padding: 10px;
+  }
+
+  .analyse-wrapper {
+    margin: 0.8rem auto;
+  }
+
+  .analyse-content {
+    max-height: 250px;
+    font-size: 13px;
+  }
+
+  .analyse-heading {
+    font-size: 17px;
+    margin-bottom: 10px;
+  }
+}
+
+/* Tablets (Portrait) - 768px to 1024px */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .analyse-container {
+    padding: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 255, 159, 0.04);
+  }
+
+  .analyse-wrapper {
+    padding: 0rem;
+    margin: 1.5rem auto;
+  }
+
+  .analyse-heading {
+    font-size: 20px;
+    margin-bottom: 18px;
+    padding: 10px;
+  }
+
+  .analyse-content {
+    font-size: 15px;
+    line-height: 1.55;
+    max-height: 400px;
+    padding-right: 5px;
+  }
+
+  .analyse-content::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  .analyse-content p {
+    margin-bottom: 14px;
+  }
+
+  .analyse-content ul {
+    padding-left: 18px;
+    margin-bottom: 14px;
+  }
+
+  .analyse-content li {
+    margin-bottom: 9px;
+  }
+
+  .analyse-content h1,
+  .analyse-content h2,
+  .analyse-content h3,
+  .analyse-content h4,
+  .analyse-content h5,
+  .analyse-content h6 {
+    margin: 0.9rem 0;
+    font-size: 1.1rem;
+    padding-left: 9px;
+  }
+
+  .analyse-content blockquote {
+    margin: 0.9rem 0;
+    padding: 0.45rem 0.9rem;
+  }
+
+  .analyse-content code {
+    font-size: 0.85rem;
+    padding: 1.5px 5px;
+  }
+
+  .analyse-empty {
+    margin-top: 25px;
+  }
+}
+
+
+/* Print styles */
+@media print {
+  .analyse-container {
+    background: white !important;
+    color: black !important;
+    padding: 20px;
+    box-shadow: none;
+  }
+
+  .analyse-wrapper {
+    background: white !important;
+    margin: 0;
+    padding: 0;
+  }
+
+  .analyse-heading {
+    color: black !important;
+    background-color: transparent !important;
+  }
+
+  .analyse-content {
+    max-height: none;
+    overflow: visible;
+    color: black !important;
+  }
+
+  .analyse-content::-webkit-scrollbar {
+    display: none;
+  }
+
+  .analyse-content h1,
+  .analyse-content h2,
+  .analyse-content h3,
+  .analyse-content h4,
+  .analyse-content h5,
+  .analyse-content h6 {
+    color: black !important;
+    border-left: 3px solid black !important;
+  }
+
+  .analyse-content strong {
+    color: black !important;
+  }
+
+  .analyse-content blockquote {
+    background: #f5f5f5 !important;
+    border-left: 4px solid black !important;
+    color: black !important;
+  }
+
+  .analyse-content code {
+    background: #f0f0f0 !important;
+    color: black !important;
+  }
+
+  .analyse-content li {
+    color: black !important;
+  }
+
+  .analyse-content em {
+    color: black !important;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .analyse-container {
+    border: 2px solid #fff;
+  }
+
+  .analyse-content h1,
+  .analyse-content h2,
+  .analyse-content h3,
+  .analyse-content h4,
+  .analyse-content h5,
+  .analyse-content h6 {
+    border-left: 4px solid #00ff9f;
+  }
+
+  .analyse-content blockquote {
+    border-left: 5px solid #00ff9f;
+  }
+
+  .analyse-content code {
+    border: 1px solid #00ff9f;
+  }
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .analyse-content {
+    scroll-behavior: auto;
+  }
+}
+
+/* Focus styles for accessibility */
+.analyse-content:focus {
+  outline: 2px solid #00ff9f;
+  outline-offset: 2px;
 }

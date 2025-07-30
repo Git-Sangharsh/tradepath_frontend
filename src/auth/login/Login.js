@@ -1,7 +1,7 @@
 import AuthAsset from "../../assets/signup.mp4";
 import "../signup/signup.css";
 import { useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
@@ -12,6 +12,7 @@ const Login = () => {
 
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const [error, setError] = useState(null);
 
   const handleEmail = (e) => {
     setEmail(e.target.value);
@@ -26,6 +27,19 @@ const Login = () => {
   };
 
   const submitBtn = async () => {
+    setError(null);
+
+    // Check if email ends with @gmail.com
+    if (!email || !email.endsWith("@gmail.com")) {
+      setError("Email must be a valid @gmail.com address");
+      return;
+    }
+
+    if (!password) {
+      setError("Password is required");
+      return;
+    }
+
     try {
       const res = await axios.post(
         `${process.env.REACT_APP_API_URL}/api/auth/login`,
@@ -44,16 +58,17 @@ const Login = () => {
       navigate("/");
       dispatch({ type: "SET_IS_AUTHENTICATED", payload: true });
     } catch (err) {
-      console.error(
-        "Error found while logging in:",
-        err.response?.data || err.message
-      );
+      const msg = err.response?.data?.message || "Something went wrong";
+      setError(msg);
+      setTimeout(() => setError(null), 5000);
     }
   };
 
   return (
     <div className="auth-container">
-      <div className="auth-wrapper">
+      <div className="auth-wrapper"   onKeyDown={(e) => {
+    if (e.key === "Enter") submitBtn();
+  }}>
         <motion.div
           className="auth-box"
           initial={{ opacity: 0, y: 50 }}
@@ -76,12 +91,25 @@ const Login = () => {
             className="auth-input font-var-2"
             onChange={handlePassword}
           />
-          <button className="auth-btn font-var-2" onClick={submitBtn}>
+          <button className="auth-btn font-var-2" onClick={submitBtn} >
             Login
           </button>
           <h6 className="auth-link font-var-2" onClick={SignupRoute}>
             Sign up and get started today!
           </h6>
+          <AnimatePresence>
+            {error && (
+              <motion.h6
+                className="auth-error font-var"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                {error}
+              </motion.h6>
+            )}
+          </AnimatePresence>
         </motion.div>
 
         <div className="video-wrapper">

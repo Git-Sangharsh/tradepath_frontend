@@ -1,7 +1,7 @@
 import "./signup.css";
 import AuthAsset from "../../assets/signup.mp4";
 import { useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import axios from "axios";
 
@@ -11,6 +11,7 @@ const Signup = () => {
   const [fullName, setFullName] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const [error, setError] = useState(null);
 
   const handleFullName = (e) => {
     setFullName(e.target.value);
@@ -28,35 +29,48 @@ const Signup = () => {
     navigate("/auth/login");
   };
 
-const submitBtn = async () => {
-  try {
-    const res = await axios.post(
-      `${process.env.REACT_APP_API_URL}/api/auth/signup`,
-      {
-        fullName,
-        email,
-        password,
-      }
-    );
+  const submitBtn = async () => {
+    setError(null);
 
-    console.log("Signup success:", res.data);
-
-    // If backend returns a token after signup
-    if (res.data.token) {
-      localStorage.setItem("token", res.data.token);
+    // Basic client-side checks
+    if (!fullName || !email || !password) {
+      setError("All fields are required");
+      setTimeout(() => setError(null), 5000);
+      return;
     }
 
-    // Navigate to home or dashboard
-    navigate("/");
-  } catch (error) {
-    console.error("Signup failed:", error.response?.data || error.message);
-    alert("Signup failed. Please check your details.");
-  }
-};
+    if (!email.endsWith("@gmail.com")) {
+      setError("Email must be a valid @gmail.com address");
+      setTimeout(() => setError(null), 5000);
+      return;
+    }
+
+    try {
+      const res = await axios.post(
+        `${process.env.REACT_APP_API_URL}/api/auth/signup`,
+        { fullName, email, password }
+      );
+
+      if (res.data.token) {
+        localStorage.setItem("token", res.data.token);
+      }
+
+      navigate("/");
+    } catch (error) {
+      const msg = error.response?.data?.message || "Signup failed";
+      setError(msg);
+      setTimeout(() => setError(null), 5000);
+    }
+  };
 
   return (
     <div className="auth-container">
-      <div className="auth-wrapper">
+      <div
+        className="auth-wrapper"
+        onKeyDown={(e) => {
+          if (e.key === "Enter") submitBtn();
+        }}
+      >
         <motion.div
           className="auth-box"
           initial={{ opacity: 0, y: 50 }}
@@ -91,10 +105,23 @@ const submitBtn = async () => {
           <h6 className="auth-link font-var-2" onClick={LoginRoute}>
             Already have an Account? Login Now!
           </h6>
+          <AnimatePresence>
+            {error && (
+              <motion.h6
+                className="auth-error font-var"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                {error}
+              </motion.h6>
+            )}
+          </AnimatePresence>
         </motion.div>
 
         <div className="video-wrapper">
-          <video src={AuthAsset} autoPlay muted  playsInline />
+          <video src={AuthAsset} autoPlay muted playsInline />
         </div>
       </div>
     </div>

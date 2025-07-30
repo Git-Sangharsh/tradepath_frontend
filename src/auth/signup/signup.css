@@ -105,6 +105,11 @@
   cursor: pointer;
 }
 
+.auth-error{
+  text-align: center;
+  color: red;
+}
+
 @media screen and (max-width: 1024px) {
   .auth-wrapper {
     padding-left: 5%;

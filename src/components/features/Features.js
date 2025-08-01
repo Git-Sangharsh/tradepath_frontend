@@ -6,6 +6,7 @@ import DashboardAsset from "../../assets/dashboard.mp4";
 import AnalysisAsset from "../../assets/statistics.mp4";
 import BaisAsset from "../../assets/bais.mp4";
 import ZenAsset from "../../assets/zen.mp4";
+import { useNavigate } from "react-router-dom";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -42,6 +43,7 @@ const featuresData = [
 
 const Features = () => {
   const sectionRef = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const leftElements = sectionRef.current.querySelectorAll(".features-left");
@@ -88,6 +90,10 @@ const Features = () => {
     };
   }, []);
 
+  const handleAuthRoute = () => {
+    navigate("/auth/login");
+  };
+
   return (
     <section className="features" ref={sectionRef}>
       {featuresData.map((feature, index) => (
@@ -104,7 +110,7 @@ const Features = () => {
             <p className="features-description font-var-2">
               {feature.description}
             </p>
-            <button className="features-btn">Get Started Now</button>
+            <button className="features-btn" onClick={handleAuthRoute}>Get Started Now</button>
           </div>
 
           <div className="features-right">

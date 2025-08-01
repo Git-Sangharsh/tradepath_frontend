@@ -21,6 +21,15 @@
   position: relative;
 }
 
+.back-home{
+  position: absolute;
+  top: 3rem;
+  right: 3rem;
+  z-index: 3;
+  color: white;
+  cursor: pointer;
+}
+
 .auth-box {
   position: relative;
   z-index: 2;
@@ -43,10 +52,13 @@
 .auth-title {
   font-size: 2.5rem;
   margin-bottom: 10px;
+  text-align: center  ;
+
 }
 
 .auth-p{
     font-size: 0.8rem;
+    text-align: center  ;
 }
 
 .auth-input {

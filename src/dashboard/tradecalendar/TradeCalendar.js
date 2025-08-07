@@ -9,6 +9,8 @@ import previousSvg from "../../assets/previous.svg";
 
 const AnimatedPNL = ({ target }) => {
   const motionVal = useMotionValue(0);
+  const [hasAnimated, setHasAnimated] = useState(false);
+
   const rounded = useTransform(motionVal, (latest) => {
     return target >= 0
       ? `$${latest.toFixed(2)}`
@@ -16,20 +18,30 @@ const AnimatedPNL = ({ target }) => {
   });
 
   useEffect(() => {
-    const controls = animate(motionVal, target, {
-      duration: 3,
-      ease: "easeOut",
-    });
-    return controls.stop;
-  }, [target, motionVal]);
+    // Only animate if we haven't animated to this target before
+    if (!hasAnimated) {
+      const controls = animate(motionVal, target, {
+        duration: 3,
+        ease: "easeOut",
+      });
+      setHasAnimated(true);
+      return controls.stop;
+    } else {
+      // If already animated, set the value directly
+      motionVal.set(target);
+    }
+  }, [target, motionVal, hasAnimated]);
+
+  // Reset hasAnimated when target changes significantly (month change)
+  useEffect(() => {
+    setHasAnimated(false);
+  }, [target]);
 
   return <motion.span>{rounded}</motion.span>;
 };
 
 const TradeCalendar = () => {
   const journalData = useSelector((state) => state.journalData || []);
-
-  const [animatedTradeMap, setAnimatedTradeMap] = useState({});
 
   const today = new Date();
   const [monthOffSet, setMonthOffSet] = useState(0);
@@ -75,23 +87,8 @@ const TradeCalendar = () => {
     return map;
   }, [journalData, currentMonth, currentYear]);
 
-  // Animate trade data changes
-  useEffect(() => {
-    setAnimatedTradeMap({}); // Clear before animation begins
-    if (Object.keys(tradeMap).length > 0) {
-      const days = Object.keys(tradeMap).sort(
-        (a, b) => parseInt(a) - parseInt(b)
-      );
-      days.forEach((day, index) => {
-        setTimeout(() => {
-          setAnimatedTradeMap((prev) => ({
-            ...prev,
-            [day]: tradeMap[day],
-          }));
-        }, index * 50);
-      });
-    }
-  }, [tradeMap]);
+  // Use tradeMap directly instead of creating animatedTradeMap
+  // This prevents the component from remounting
 
   const renderCells = () => {
     const cells = [];
@@ -101,7 +98,7 @@ const TradeCalendar = () => {
     }
 
     for (let day = 1; day <= daysInMonth; day++) {
-      const trade = animatedTradeMap[day]; // Use animated trade map
+      const trade = tradeMap[day]; // Use tradeMap directly
       const isWin = trade?.wins > trade?.losses;
       const isLoss = trade?.losses > trade?.wins;
 
@@ -145,7 +142,7 @@ const TradeCalendar = () => {
 
       cells.push(
         <motion.div
-          key={day}
+          key={`${currentMonth}-${currentYear}-${day}`} // Add month/year to key to force remount on month change
           className={`calendar-cell ${cellClass}`}
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{
@@ -171,7 +168,7 @@ const TradeCalendar = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, delay: 0.2 }}
             >
-              <AnimatedPNL target={trade.pnl} />
+              <AnimatedPNL target={trade.pnl} key={`${currentMonth}-${currentYear}-${day}-pnl`} />
             </motion.div>
           )}
         </motion.div>
@@ -199,21 +196,19 @@ const TradeCalendar = () => {
             className="calendar-header-svg"
             alt=""
           />
-          {/* {today.toLocaleString("default", { month: "long" })} {currentYear} */}
           <div>
             {viewDate.toLocaleString("default", { month: "long" })}{" "}
             {viewDate.getFullYear()}
           </div>
 
-<img
-  onClick={() => {
-    if (!isNextMonthDisabled) handleNextMonth();
-  }}
-  src={nextSvg}
-  className={`calendar-header-svg ${isNextMonthDisabled ? "disabled" : ""}`}
-  alt="Next Month"
-/>
-
+          <img
+            onClick={() => {
+              if (!isNextMonthDisabled) handleNextMonth();
+            }}
+            src={nextSvg}
+            className={`calendar-header-svg ${isNextMonthDisabled ? "disabled" : ""}`}
+            alt="Next Month"
+          />
         </div>
         <div className="calendar-grid">
           {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((d) => (

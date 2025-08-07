@@ -217,13 +217,14 @@ const JournalModal = ({ onSubmit }) => {
           >
             <h2 className="modal-title font-var">Add Journal Entry</h2>
             <form onSubmit={handleSubmit} className="font-var">
-              <input
-                className="font-var"
-                type="date"
-                name="date"
-                onChange={handleChange}
-                required
-              />
+            <input
+    className="font-var"
+    type="date"
+    name="date"
+    onChange={handleChange}
+    required
+    max={new Date().toISOString().split("T")[0]} // Prevent future dates
+  />
 
               <div className="confluence-section">
                 <label className="confluence-label">Asset</label>

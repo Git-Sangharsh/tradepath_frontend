@@ -30,8 +30,14 @@ const TradeCalendar = () => {
   const [animatedTradeMap, setAnimatedTradeMap] = useState({});
 
   const today = new Date();
-  const currentMonth = today.getMonth();
-  const currentYear = today.getFullYear();
+  const [monthOffSet, setMonthOffSet] = useState(0);
+  const viewDate = new Date(
+    today.getFullYear(),
+    today.getMonth() + monthOffSet
+  );
+
+  const currentMonth = viewDate.getMonth();
+  const currentYear = viewDate.getFullYear();
 
   const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
   const firstDayIndex = new Date(currentYear, currentMonth, 1).getDay();
@@ -59,24 +65,24 @@ const TradeCalendar = () => {
     });
     return map;
   }, [journalData, currentMonth, currentYear]);
+
   // Animate trade data changes
   useEffect(() => {
+    setAnimatedTradeMap({}); // Clear before animation begins
     if (Object.keys(tradeMap).length > 0) {
-      // Stagger the animation of trade data appearing
       const days = Object.keys(tradeMap).sort(
         (a, b) => parseInt(a) - parseInt(b)
       );
-
       days.forEach((day, index) => {
         setTimeout(() => {
           setAnimatedTradeMap((prev) => ({
             ...prev,
             [day]: tradeMap[day],
           }));
-        }, index * 50); // 50ms delay between each day
+        }, index * 50);
       });
     }
-  }, [journalData, tradeMap]); // Re-run when journal data changes
+  }, [tradeMap]);
 
   const renderCells = () => {
     const cells = [];
@@ -166,11 +172,23 @@ const TradeCalendar = () => {
     return cells;
   };
 
+  const handlePreviousMonth = () => {
+    setMonthOffSet((prev) => prev - 1);
+  };
+
+  const handleNextMonth = () => {
+    setMonthOffSet((prev) => prev + 1);
+  };
+
   return (
     <div className="calendar-container font-var">
       <div className="calendar-wrapper">
         <div className="calendar-header">
-          {today.toLocaleString("default", { month: "long" })} {currentYear}
+          <button onClick={handlePreviousMonth}>previous Month</button>
+          {/* {today.toLocaleString("default", { month: "long" })} {currentYear} */}
+          {viewDate.toLocaleString("default", { month: "long" })}{" "}
+          {viewDate.getFullYear()}
+          <button onClick={handleNextMonth}>Next Month</button>
         </div>
         <div className="calendar-grid">
           {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((d) => (

@@ -4,6 +4,8 @@ import "./TradeCalendar.css";
 import RecentTrades from "../recenttrades/RecentTrades";
 import { motion } from "framer-motion";
 import { useMotionValue, animate, useTransform } from "framer-motion";
+import nextSvg from "../../assets/next.svg";
+import previousSvg from "../../assets/previous.svg";
 
 const AnimatedPNL = ({ target }) => {
   const motionVal = useMotionValue(0);
@@ -36,8 +38,15 @@ const TradeCalendar = () => {
     today.getMonth() + monthOffSet
   );
 
+  const realCurrentMonth = today.getMonth();
+  const realCurrentYear = today.getFullYear();
+
   const currentMonth = viewDate.getMonth();
   const currentYear = viewDate.getFullYear();
+
+  const isNextMonthDisabled =
+    viewDate.getMonth() === realCurrentMonth &&
+    viewDate.getFullYear() === realCurrentYear;
 
   const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
   const firstDayIndex = new Date(currentYear, currentMonth, 1).getDay();
@@ -184,11 +193,27 @@ const TradeCalendar = () => {
     <div className="calendar-container font-var">
       <div className="calendar-wrapper">
         <div className="calendar-header">
-          <button onClick={handlePreviousMonth}>previous Month</button>
+          <img
+            onClick={handlePreviousMonth}
+            src={previousSvg}
+            className="calendar-header-svg"
+            alt=""
+          />
           {/* {today.toLocaleString("default", { month: "long" })} {currentYear} */}
-          {viewDate.toLocaleString("default", { month: "long" })}{" "}
-          {viewDate.getFullYear()}
-          <button onClick={handleNextMonth}>Next Month</button>
+          <div>
+            {viewDate.toLocaleString("default", { month: "long" })}{" "}
+            {viewDate.getFullYear()}
+          </div>
+
+<img
+  onClick={() => {
+    if (!isNextMonthDisabled) handleNextMonth();
+  }}
+  src={nextSvg}
+  className={`calendar-header-svg ${isNextMonthDisabled ? "disabled" : ""}`}
+  alt="Next Month"
+/>
+
         </div>
         <div className="calendar-grid">
           {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((d) => (

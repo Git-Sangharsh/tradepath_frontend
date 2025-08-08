@@ -63,7 +63,7 @@ const RecentTrades = () => {
 
   return (
     <div className="recent-trades-container">
-      <div className="calendar-header">Recent Trades</div>
+      <div className="calendar-header-one">Recent Trades</div>
       <motion.div
         className="recent-trades-grid"
         variants={containerVariants}

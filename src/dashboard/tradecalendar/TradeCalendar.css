@@ -188,7 +188,9 @@
     order: 2;
   }
 
-  .calendar-header {
+  .calendar-header,
+  .calendar-header-one
+  {
     font-size: 1.2rem;
     margin-bottom: 0.8rem;
   }
@@ -270,8 +272,8 @@
   .calendar-wrapper-2 {
     width: 30%;
   }
-
-  .calendar-header {
+  .calendar-header,
+  .calendar-header-one{
     font-size: 1.3rem;
     margin-bottom: 0.9rem;
   }
@@ -353,7 +355,8 @@
     width: 20%;
   }
 
-  .calendar-header {
+  .calendar-header,
+  .calendar-header-one{
     font-size: 1.5rem;
     margin-bottom: 1rem;
   }
@@ -423,7 +426,8 @@
     padding: 2rem;
   }
 
-  .calendar-header {
+  .calendar-header,
+  .calendar-header-one {
     font-size: 1.8rem;
     margin-bottom: 1.2rem;
   }

@@ -9,7 +9,7 @@ const Analyse = () => {
   return (
     <div className="analyse-container">
       <div className="analyse-wrapper">
-        <h2 className="analyse-heading font-var">TradePath AI Analysis</h2>
+        <h2 className="analyse-heading font-var">TradeSense AI Analysis</h2>
         {analyseData ? (
           <div className="analyse-content font-var">
             <ReactMarkdown>{analyseData}</ReactMarkdown>

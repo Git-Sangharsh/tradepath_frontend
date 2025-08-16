@@ -44,7 +44,7 @@ const TradeCalendar = () => {
   const journalData = useSelector((state) => state.journalData || []);
   console.log('jornala data iss', journalData)
 
-  
+
   const today = new Date();
   const [monthOffSet, setMonthOffSet] = useState(0);
   const viewDate = new Date(
@@ -112,6 +112,12 @@ const TradeCalendar = () => {
           : "neutral"
         : "";
 
+          // ✅ Format pnl value
+  const pnlValue =
+    trade && isLoss
+      ? -Math.abs(trade.pnl) // force negative
+      : trade?.pnl ?? 0;     // leave as is if win or neutral
+
       // Define color variants for smooth transitions based on your CSS
       const colorVariants = {
         default: {
@@ -170,7 +176,7 @@ const TradeCalendar = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, delay: 0.2 }}
             >
-              <AnimatedPNL target={trade.pnl} key={`${currentMonth}-${currentYear}-${day}-pnl`} />
+              <AnimatedPNL target={pnlValue} key={`${currentMonth}-${currentYear}-${day}-pnl`} />
             </motion.div>
           )}
         </motion.div>

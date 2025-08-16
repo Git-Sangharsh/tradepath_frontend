@@ -90,12 +90,12 @@ const JournalModal = ({ onSubmit }) => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); // prevent default at the top
+    e.preventDefault();
 
     try {
-      const token = localStorage.getItem("token"); // assuming you're storing JWT in localStorage
+      const token = localStorage.getItem("token");
 
-      const res = await axios.post(
+      await axios.post(
         `${process.env.REACT_APP_API_URL}/api/journal/journal`,
         formData,
         {
@@ -106,17 +106,26 @@ const JournalModal = ({ onSubmit }) => {
         }
       );
 
-      console.log("Journal entry added:", res.data);
-      console.log("setups are ",formData.setups)
-      // Close modal
+      // ✅ Fetch updated list from correct endpoint
+      const updated = await axios.get(
+        `${process.env.REACT_APP_API_URL}/api/journal/get-journal`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      // ✅ Update Redux so TradeCalendar updates instantly
+      dispatch({ type: "SET_JOURNAL_DATA", payload: updated.data.entries });
+
+      // ✅ Close modal
       dispatch({ type: "SET_JOURNAL_MODAL", payload: false });
     } catch (err) {
-      console.error(
-        "Error while adding entry:",
-        err.response?.data || err.message
-      );
+      console.error("Error while adding entry:", err.response?.data || err.message);
     }
   };
+
 
 
   const handleClose = () => {

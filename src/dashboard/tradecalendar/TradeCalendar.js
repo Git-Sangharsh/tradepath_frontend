@@ -42,7 +42,9 @@ const AnimatedPNL = ({ target }) => {
 
 const TradeCalendar = () => {
   const journalData = useSelector((state) => state.journalData || []);
+  console.log('jornala data iss', journalData)
 
+  
   const today = new Date();
   const [monthOffSet, setMonthOffSet] = useState(0);
   const viewDate = new Date(

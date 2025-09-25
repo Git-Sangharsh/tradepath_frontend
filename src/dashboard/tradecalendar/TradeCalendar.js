@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useSelector } from "react-redux";
 import "./TradeCalendar.css";
 import RecentTrades from "../recenttrades/RecentTrades";
@@ -42,7 +42,7 @@ const AnimatedPNL = ({ target }) => {
 
 const TradeCalendar = () => {
   const journalData = useSelector((state) => state.journalData || []);
-  console.log('jornala data iss', journalData)
+  // console.log('jornala data iss', journalData)
 
 
   const today = new Date();
@@ -204,7 +204,7 @@ const TradeCalendar = () => {
             className="calendar-header-svg"
             alt=""
           />
-          <div>
+          <div style={{cursor: "default"}}>
             {viewDate.toLocaleString("default", { month: "long" })}{" "}
             {viewDate.getFullYear()}
           </div>

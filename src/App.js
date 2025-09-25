@@ -16,10 +16,15 @@ import { jwtDecode } from "jwt-decode";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import Cards from "./dashboard/cards/Cards";
+import Sidebar from "./components/sidebar/Sidebar";
+import Fetcher from "./components/fetcher/Fetcher";
 
 const App = () => {
   const dispatch = useDispatch();
   const isAuthenticated = useSelector((state) => state.isAuthenticated);
+  const activeComponent = useSelector((state) => state.activeComponent);
+
+  console.log("active component is ", activeComponent);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -55,14 +60,28 @@ const App = () => {
           element={
             isAuthenticated ? (
               // Redirect or show dashboard (optional)
-              <div className="dashboard-container">
-                <Navbar />
-                <ScrollIndicator />
-                <TradeCalendar />
-                <Cards />
-                <Table />
-                <Analyse />
-                <JournalModal />
+              <div className="dashboard-container ">
+                <Sidebar />
+                <div className="split">
+                  <Navbar />
+                  <Fetcher />
+
+                  {activeComponent === "tradeCalendarComponent" ? (
+                    <div>
+                      <TradeCalendar />
+                      <JournalModal />
+                    </div>
+                  ) : activeComponent === "tableComponent" ? (
+                    <Table />
+                  ) : activeComponent === "analyseComponent" ? (
+                    <Analyse />
+                  ) : (
+                    <div>
+                      <ScrollIndicator />
+                      <Cards />
+                    </div>
+                  )}
+                </div>
               </div>
             ) : (
               <div className="app">

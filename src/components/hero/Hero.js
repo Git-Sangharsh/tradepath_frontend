@@ -2,8 +2,15 @@ import React from "react";
 import { motion } from "framer-motion";
 import "./Hero.css";
 import HeroBg from "../../assets/hero_bg.mp4";
+import { useNavigate } from "react-router-dom";
 
 const Hero = () => {
+  const navigate = useNavigate();
+
+  const handleRouteLogin = () => {
+    navigate("/auth/login");
+  };
+
   return (
     <div className="hero-container">
       <video className="hero-bg" autoPlay loop muted playsInline>
@@ -34,15 +41,17 @@ const Hero = () => {
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           transition={{ duration: 0.8, delay: 1, type: "tween" }}
         >
-          Stop guessing. Start winning — TradePath AI analyzes your trading
-          and habits to maximize success and profitability.
+          Stop guessing. Start winning — TradePath AI analyzes your trading and
+          habits to maximize success and profitability.
         </motion.p>
 
         <motion.div
           className=" font-var start-btn  "
           initial={{ opacity: 0, y: 40, filter: "blur(10px)" }}
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          transition={{ duration: 0.8, delay: 1.5, type: "tween"}}
+          transition={{ duration: 0.8, delay: 1.5, type: "tween" }}
+          onClick={handleRouteLogin}
+          style={{ cursor: "pointer" }}
         >
           Get Started Now
         </motion.div>

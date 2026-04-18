@@ -18,6 +18,7 @@ import { useEffect } from "react";
 import Cards from "./dashboard/cards/Cards";
 import Sidebar from "./components/sidebar/Sidebar";
 import Fetcher from "./components/fetcher/Fetcher";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -53,52 +54,54 @@ const App = () => {
 
   console.log("isAuthenticated is ", isAuthenticated);
   return (
-    <Router>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            isAuthenticated ? (
-              // Redirect or show dashboard (optional)
-              <div className="dashboard-container ">
-                <Sidebar />
-                <div className="split">
-                  <Navbar />
-                  <Fetcher />
+    <GoogleOAuthProvider clientId="267889382650-252ngh89pv148idna0ko9svm3hq2gamq.apps.googleusercontent.com">
+      <Router>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              isAuthenticated ? (
+                // Redirect or show dashboard (optional)
+                <div className="dashboard-container ">
+                  <Sidebar />
+                  <div className="split">
+                    <Navbar />
+                    <Fetcher />
 
-                  {activeComponent === "tradeCalendarComponent" ? (
-                    <div>
-                      <TradeCalendar />
-                      <JournalModal />
-                    </div>
-                  ) : activeComponent === "tableComponent" ? (
-                    <Table />
-                  ) : activeComponent === "analyseComponent" ? (
-                    <Analyse />
-                  ) : (
-                    <div>
-                      <ScrollIndicator />
-                      <Cards />
-                    </div>
-                  )}
+                    {activeComponent === "tradeCalendarComponent" ? (
+                      <div>
+                        <TradeCalendar />
+                        <JournalModal />
+                      </div>
+                    ) : activeComponent === "tableComponent" ? (
+                      <Table />
+                    ) : activeComponent === "analyseComponent" ? (
+                      <Analyse />
+                    ) : (
+                      <div>
+                        <ScrollIndicator />
+                        <Cards />
+                      </div>
+                    )}
+                  </div>
                 </div>
-              </div>
-            ) : (
-              <div className="app">
-                <Navbar />
-                <Hero />
-                <section id="features">
-                  <Features />
-                </section>
-                <Levelup />
-              </div>
-            )
-          }
-        />
-        <Route path="/auth/login" element={<Login />} />
-        <Route path="/auth/signup" element={<Signup />} />
-      </Routes>
-    </Router>
+              ) : (
+                <div className="app">
+                  <Navbar />
+                  <Hero />
+                  <section id="features">
+                    <Features />
+                  </section>
+                  <Levelup />
+                </div>
+              )
+            }
+          />
+          <Route path="/auth/login" element={<Login />} />
+          <Route path="/auth/signup" element={<Signup />} />
+        </Routes>
+      </Router>
+    </GoogleOAuthProvider>
   );
 };
 

@@ -3,7 +3,7 @@ import dashboardSvg from "../../assets/dashboard.svg";
 import aiSvg from "../../assets/ai.svg";
 import historySvg from "../../assets/history.svg";
 import { useDispatch } from "react-redux";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 
 const Sidebar = () => {
   const dispatch = useDispatch();

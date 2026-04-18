@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
+import { GoogleLogin } from "@react-oauth/google";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -46,7 +47,7 @@ const Login = () => {
         {
           email,
           password,
-        }
+        },
       );
 
       // Store the token BEFORE navigating
@@ -64,11 +65,35 @@ const Login = () => {
     }
   };
 
+const handleSuccess = async (credentialResponse) => {
+  const token = credentialResponse.credential;
+
+  try {
+    const res = await axios.post(`${process.env.REACT_APP_API_URL}/api/auth/google`, {
+      credential: token,
+    });
+
+    localStorage.setItem("token", res.data.token);
+    dispatch({ type: "SET_IS_AUTHENTICATED", payload: true });
+    navigate("/");
+  } catch (err) {
+    setError("Google login failed. Please try again.");
+    setTimeout(() => setError(null), 5000);
+  }
+};
+  const handleError = () => {
+    console.log("error Occured");
+  };
+
+
   return (
     <div className="auth-container">
-      <div className="auth-wrapper"   onKeyDown={(e) => {
-    if (e.key === "Enter") submitBtn();
-  }}>
+      <div
+        className="auth-wrapper"
+        onKeyDown={(e) => {
+          if (e.key === "Enter") submitBtn();
+        }}
+      >
         <motion.div
           className="auth-box"
           initial={{ opacity: 0, y: 50 }}
@@ -91,12 +116,25 @@ const Login = () => {
             className="auth-input font-var-2"
             onChange={handlePassword}
           />
-          <button className="auth-btn font-var-2" onClick={submitBtn} >
+          <button className="auth-btn font-var-2" onClick={submitBtn}>
             Login
           </button>
           <h6 className="auth-link font-var-2" onClick={SignupRoute}>
             Sign up and get started today!
           </h6>
+          <button
+            className="auth-btn font-var-2"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "8px",
+            }}
+          >
+<GoogleLogin onSuccess={handleSuccess} onError={handleError} />
+
+          </button>
+
           <AnimatePresence>
             {error && (
               <motion.h6

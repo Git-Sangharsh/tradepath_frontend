@@ -65,26 +65,28 @@ const Login = () => {
     }
   };
 
-const handleSuccess = async (credentialResponse) => {
-  const token = credentialResponse.credential;
+  const handleSuccess = async (credentialResponse) => {
+    const token = credentialResponse.credential;
 
-  try {
-    const res = await axios.post(`${process.env.REACT_APP_API_URL}/api/auth/google`, {
-      credential: token,
-    });
+    try {
+      const res = await axios.post(
+        `${process.env.REACT_APP_API_URL}/api/auth/google`,
+        {
+          credential: token,
+        },
+      );
 
-    localStorage.setItem("token", res.data.token);
-    dispatch({ type: "SET_IS_AUTHENTICATED", payload: true });
-    navigate("/");
-  } catch (err) {
-    setError("Google login failed. Please try again.");
-    setTimeout(() => setError(null), 5000);
-  }
-};
+      localStorage.setItem("token", res.data.token);
+      dispatch({ type: "SET_IS_AUTHENTICATED", payload: true });
+      navigate("/");
+    } catch (err) {
+      setError("Google login failed. Please try again.");
+      setTimeout(() => setError(null), 5000);
+    }
+  };
   const handleError = () => {
     console.log("error Occured");
   };
-
 
   return (
     <div className="auth-container">
@@ -131,8 +133,7 @@ const handleSuccess = async (credentialResponse) => {
               gap: "8px",
             }}
           >
-<GoogleLogin onSuccess={handleSuccess} onError={handleError} />
-
+            <GoogleLogin onSuccess={handleSuccess} onError={handleError} />
           </button>
 
           <AnimatePresence>

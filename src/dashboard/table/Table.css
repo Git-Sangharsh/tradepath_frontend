@@ -5,8 +5,9 @@
   color: white;
   box-shadow: 0 0 10px #00ff9f22;
   margin-top: 6vh;
-  max-height: 94vh;
+  /* max-height: 94vh; */
   overflow-y: auto;
+  border: 6px solid red;
 }
 
 /* Title */

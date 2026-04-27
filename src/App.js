@@ -53,6 +53,23 @@ const App = () => {
   }, [dispatch]);
 
   console.log("isAuthenticated is ", isAuthenticated);
+
+  useEffect(() => {
+    const handleKey = (e) => {
+      if (
+        e.target.tagName === "INPUT" ||
+        e.target.tagName === "TEXTAREA" ||
+        e.target.tagName === "SELECT"
+      )
+        return;
+      if (e.key === "d" || e.key === "D") {
+        dispatch({ type: "SET_JOURNAL_MODAL", payload: true });
+      }
+    };
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [dispatch]);
+
   return (
     <GoogleOAuthProvider clientId="267889382650-252ngh89pv148idna0ko9svm3hq2gamq.apps.googleusercontent.com">
       <Router>
@@ -67,11 +84,13 @@ const App = () => {
                   <div className="split">
                     <Navbar />
                     <Fetcher />
+                    <JournalModal />
+
+                    {/* <Entry /> */}
 
                     {activeComponent === "tradeCalendarComponent" ? (
                       <div>
                         <TradeCalendar />
-                        <JournalModal />
                       </div>
                     ) : activeComponent === "tableComponent" ? (
                       <Table />

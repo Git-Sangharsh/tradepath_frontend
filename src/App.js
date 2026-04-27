@@ -19,11 +19,13 @@ import Cards from "./dashboard/cards/Cards";
 import Sidebar from "./components/sidebar/Sidebar";
 import Fetcher from "./components/fetcher/Fetcher";
 import { GoogleOAuthProvider } from "@react-oauth/google";
+import Loader from "./common/Loader";
 
 const App = () => {
   const dispatch = useDispatch();
   const isAuthenticated = useSelector((state) => state.isAuthenticated);
   const activeComponent = useSelector((state) => state.activeComponent);
+  // const journalLoader = useSelector((state) => state.getJournalLoader);
 
   console.log("active component is ", activeComponent);
 
@@ -64,6 +66,8 @@ const App = () => {
         return;
       if (e.key === "d" || e.key === "D") {
         dispatch({ type: "SET_JOURNAL_MODAL", payload: true });
+      } else if(e.key === "Escape"){
+        dispatch({ type: "SET_JOURNAL_MODAL", payload: false});
       }
     };
     window.addEventListener("keydown", handleKey);
@@ -86,7 +90,10 @@ const App = () => {
                     <Fetcher />
                     <JournalModal />
 
+
+                    <Loader />
                     {/* <Entry /> */}
+
 
                     {activeComponent === "tradeCalendarComponent" ? (
                       <div>

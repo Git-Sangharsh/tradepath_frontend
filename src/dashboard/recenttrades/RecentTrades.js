@@ -100,11 +100,11 @@ const RecentTrades = () => {
             );
           })}
       </motion.div>
-      {journalData && journalData.length > 0 && (
+      {/* {journalData && journalData.length > 0 && ( */}
         <div onClick={handleAddTrade} className="add-btn">
           ADD Trade
         </div>
-      )}
+      {/* )} */}
     </div>
   );
 };

@@ -19,11 +19,13 @@ import Cards from "./dashboard/cards/Cards";
 import Sidebar from "./components/sidebar/Sidebar";
 import Fetcher from "./components/fetcher/Fetcher";
 import { GoogleOAuthProvider } from "@react-oauth/google";
+import Loader from "./common/Loader";
 
 const App = () => {
   const dispatch = useDispatch();
   const isAuthenticated = useSelector((state) => state.isAuthenticated);
   const activeComponent = useSelector((state) => state.activeComponent);
+  // const journalLoader = useSelector((state) => state.getJournalLoader);
 
   console.log("active component is ", activeComponent);
 
@@ -88,7 +90,10 @@ const App = () => {
                     <Fetcher />
                     <JournalModal />
 
+
+                    <Loader />
                     {/* <Entry /> */}
+
 
                     {activeComponent === "tradeCalendarComponent" ? (
                       <div>

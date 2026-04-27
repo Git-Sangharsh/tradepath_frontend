@@ -10,6 +10,8 @@ const Fetcher = () => {
       const token = localStorage.getItem("token");
 
       try {
+        // start of getJournalLoader
+        dispatch({type: "SET_GET_JOURNAL_LOADER", payload: true})
         const res = await axios.get(
           `${process.env.REACT_APP_API_URL}/api/journal/get-journal`,
           {
@@ -27,6 +29,8 @@ const Fetcher = () => {
         // console.log("data is fetch from the fetcher ", res.data);
       } catch (err) {
         console.error("error fetching data ", err);
+      } finally{
+        dispatch({type: "SET_GET_JOURNAL_LOADER", payload: false})
       }
     };
 

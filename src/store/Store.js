@@ -7,7 +7,8 @@ const initialState = {
   journalData: [],
   isAuthenticated: false,
   activeComponent: "tradeCalendarComponent",
-  fetcherData: null
+  fetcherData: null,
+  getJournalLoader: true
 };
 
 // Minimal reducer
@@ -27,6 +28,8 @@ const Reducer = (state = initialState, action) => {
       return {...state, activeComponent: action.payload};
     case "SET_FETCHER_DATA":
       return {...state, fetcherData: action.payload}
+    case "SET_GET_JOURNAL_LOADER":
+      return {...state, getJournalLoader: action.payload}
     default:
       return state;
   }

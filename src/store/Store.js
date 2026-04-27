@@ -5,7 +5,9 @@ const initialState = {
   showJournalModal: false,
   analyseData: null,
   journalData: [],
-  isAuthenticated: false
+  isAuthenticated: false,
+  activeComponent: "tradeCalendarComponent",
+  fetcherData: null
 };
 
 // Minimal reducer
@@ -21,6 +23,10 @@ const Reducer = (state = initialState, action) => {
       return {...state, journalData: action.payload};
     case "SET_IS_AUTHENTICATED":
       return {...state, isAuthenticated: action.payload};
+    case "SET_ACTIVE_COMPONENT":
+      return {...state, activeComponent: action.payload};
+    case "SET_FETCHER_DATA":
+      return {...state, fetcherData: action.payload}
     default:
       return state;
   }

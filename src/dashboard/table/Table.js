@@ -1,39 +1,11 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
 import "./Table.css";
-import { useDispatch} from "react-redux";
+import { useSelector} from "react-redux";
 
 const Table = () => {
-  const dispatch = useDispatch();
   // const journalData = useSelector(state => state.journalData)
-  const [journals, setJournals] = useState([]);
+  // const [journals, setJournals] = useState([]);
 
-  useEffect(() => {
-    const fetchJournals = async () => {
-      const token = localStorage.getItem("token");
-
-      try {
-        const res = await axios.get(
-        `${process.env.REACT_APP_API_URL}/api/journal/get-journal`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        setJournals(res.data.entries);
-        // console.log(res.data.entries);
-
-        dispatch({ type: "SET_ANALYSE_DATA", payload: res.data.analysis });
-        dispatch({type: "SET_JOURNAL_DATA", payload: res.data.entries});
-      } catch (err) {
-        console.error("Error fetching journal data:", err);
-      }
-    };
-
-    fetchJournals();
-  }, [dispatch]);
-
+  const journals = useSelector((state) => state.fetcherData?.entries || []);
   // console.log(journalData)
 
   return (
@@ -54,7 +26,7 @@ const Table = () => {
           </tr>
         </thead>
         <tbody>
-          {journals.map((data, i) => (
+          {journals?.map((data, i) => (
             <tr key={i}>
               <td className="font-var">
                 {new Date(data.date).toLocaleDateString()} <br />

@@ -16,10 +16,16 @@ import { jwtDecode } from "jwt-decode";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import Cards from "./dashboard/cards/Cards";
+import Sidebar from "./components/sidebar/Sidebar";
+import Fetcher from "./components/fetcher/Fetcher";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 const App = () => {
   const dispatch = useDispatch();
   const isAuthenticated = useSelector((state) => state.isAuthenticated);
+  const activeComponent = useSelector((state) => state.activeComponent);
+
+  console.log("active component is ", activeComponent);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -47,39 +53,74 @@ const App = () => {
   }, [dispatch]);
 
   console.log("isAuthenticated is ", isAuthenticated);
+
+  useEffect(() => {
+    const handleKey = (e) => {
+      if (
+        e.target.tagName === "INPUT" ||
+        e.target.tagName === "TEXTAREA" ||
+        e.target.tagName === "SELECT"
+      )
+        return;
+      if (e.key === "d" || e.key === "D") {
+        dispatch({ type: "SET_JOURNAL_MODAL", payload: true });
+      }
+    };
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [dispatch]);
+
   return (
-    <Router>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            isAuthenticated ? (
-              // Redirect or show dashboard (optional)
-              <div className="dashboard-container">
-                <Navbar />
-                <ScrollIndicator />
-                <TradeCalendar />
-                <Cards />
-                <Table />
-                <Analyse />
-                <JournalModal />
-              </div>
-            ) : (
-              <div className="app">
-                <Navbar />
-                <Hero />
-                <section id="features">
-                  <Features />
-                </section>
-                <Levelup />
-              </div>
-            )
-          }
-        />
-        <Route path="/auth/login" element={<Login />} />
-        <Route path="/auth/signup" element={<Signup />} />
-      </Routes>
-    </Router>
+    <GoogleOAuthProvider clientId="267889382650-252ngh89pv148idna0ko9svm3hq2gamq.apps.googleusercontent.com">
+      <Router>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              isAuthenticated ? (
+                // Redirect or show dashboard (optional)
+                <div className="dashboard-container ">
+                  <Sidebar />
+                  <div className="split">
+                    <Navbar />
+                    <Fetcher />
+                    <JournalModal />
+
+                    {/* <Entry /> */}
+
+                    {activeComponent === "tradeCalendarComponent" ? (
+                      <div>
+                        <TradeCalendar />
+                      </div>
+                    ) : activeComponent === "tableComponent" ? (
+                      <Table />
+                    ) : activeComponent === "analyseComponent" ? (
+                      <Analyse />
+                    ) : (
+                      <div>
+                        <ScrollIndicator />
+                        <Cards />
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ) : (
+                <div className="app">
+                  <Navbar />
+                  <Hero />
+                  <section id="features">
+                    <Features />
+                  </section>
+                  <Levelup />
+                </div>
+              )
+            }
+          />
+          <Route path="/auth/login" element={<Login />} />
+          <Route path="/auth/signup" element={<Signup />} />
+        </Routes>
+      </Router>
+    </GoogleOAuthProvider>
   );
 };
 

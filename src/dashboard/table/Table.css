@@ -4,7 +4,10 @@
   padding: 20px;
   color: white;
   box-shadow: 0 0 10px #00ff9f22;
-  /* min-height: 100vh; */
+  margin-top: 6vh;
+  /* max-height: 94vh; */
+  overflow-y: auto;
+  /* border: 6px solid red;  */
 }
 
 /* Title */
@@ -13,6 +16,18 @@
   margin-bottom: 20px;
   text-align: center;
   font-family: 'YourFontVar', sans-serif;
+}
+.table-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.table-container::-webkit-scrollbar-thumb {
+  background: #00ff9f55;
+  /* border-radius: 4px; */
+}
+
+.table-container::-webkit-scrollbar-track {
+  background: #111;
 }
 
 /* Table base */

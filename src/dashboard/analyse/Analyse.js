@@ -6,6 +6,8 @@ import "./Analyse.css"; // custom styling
 const Analyse = () => {
   const analyseData = useSelector((state) => state.analyseData);
 
+  
+
   return (
     <div className="analyse-container">
       <div className="analyse-wrapper">

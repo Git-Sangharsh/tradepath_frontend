@@ -4,9 +4,12 @@ import { useNavigate } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import axios from "axios";
+import { GoogleLogin } from "@react-oauth/google";
+import { useDispatch } from "react-redux";
 
 const Signup = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [fullName, setFullName] = useState();
   const [email, setEmail] = useState();
@@ -48,7 +51,7 @@ const Signup = () => {
     try {
       const res = await axios.post(
         `${process.env.REACT_APP_API_URL}/api/auth/signup`,
-        { fullName, email, password }
+        { fullName, email, password },
       );
 
       if (res.data.token) {
@@ -61,6 +64,29 @@ const Signup = () => {
       setError(msg);
       setTimeout(() => setError(null), 5000);
     }
+  };
+
+  const handleSuccess = async (credentialResponse) => {
+    const token = credentialResponse.credential;
+
+    try {
+      const res = await axios.post(
+        `${process.env.REACT_APP_API_URL}/api/auth/google`,
+        {
+          credential: token,
+        },
+      );
+
+      localStorage.setItem("token", res.data.token);
+      dispatch({ type: "SET_IS_AUTHENTICATED", payload: true });
+      navigate("/");
+    } catch (err) {
+      setError("Google login failed. Please try again.");
+      setTimeout(() => setError(null), 5000);
+    }
+  };
+  const handleError = () => {
+    console.log("error Occured");
   };
 
   return (
@@ -102,6 +128,17 @@ const Signup = () => {
           <button className="auth-btn font-var-2" onClick={submitBtn}>
             Sign Up
           </button>
+          <button
+            className="auth-btn font-var-2"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "8px",
+            }}
+          >
+            <GoogleLogin onSuccess={handleSuccess} onError={handleError} />
+          </button>{" "}
           <h6 className="auth-link font-var-2" onClick={LoginRoute}>
             Already have an Account? Login Now!
           </h6>

@@ -5,7 +5,9 @@
   padding: 1rem;
   box-shadow: 0 6px 16px rgba(0, 255, 159, 0.05);
   background: linear-gradient(to bottom, #0B2918, #000000);
-
+  margin-top: 6vh;
+  /* border: 2px solid white; */
+  height: 94vh;
 }
 
 .analyse-wrapper {
@@ -17,8 +19,9 @@
   /* border-radius: 16px; */
   /* box-shadow: 0 0 12px #00ff9f22; */
   /* max-width: 800px; */
-  margin: 2rem auto;
+  /* margin: 2rem auto; */
   /* border: 1px solid #00ff9f22; */
+  height: 100%;
 
 }
 
@@ -35,7 +38,8 @@
 .analyse-content {
   font-size: 16px;
   line-height: 1.6;
-  max-height: 500px;
+  /* max-height: 500px; */
+  max-height: 96vh;
   overflow-y: auto;
   padding-right: 6px;
 }
@@ -71,6 +75,10 @@
   text-align: center;
   color: #888;
   margin-top: 30px;
+      -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+      font-family: "Bebas Neue", sans-serif;
+    font-weight: 500;
 }
 
 

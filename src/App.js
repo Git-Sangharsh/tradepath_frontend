@@ -91,6 +91,7 @@ const App = () => {
                     {activeComponent === "tradeCalendarComponent" ? (
                       <div>
                         <TradeCalendar />
+                        <Cards />
                       </div>
                     ) : activeComponent === "tableComponent" ? (
                       <Table />
@@ -99,7 +100,6 @@ const App = () => {
                     ) : (
                       <div>
                         <ScrollIndicator />
-                        <Cards />
                       </div>
                     )}
                   </div>

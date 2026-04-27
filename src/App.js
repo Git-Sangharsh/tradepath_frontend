@@ -64,6 +64,8 @@ const App = () => {
         return;
       if (e.key === "d" || e.key === "D") {
         dispatch({ type: "SET_JOURNAL_MODAL", payload: true });
+      } else if(e.key === "Escape"){
+        dispatch({ type: "SET_JOURNAL_MODAL", payload: false});
       }
     };
     window.addEventListener("keydown", handleKey);

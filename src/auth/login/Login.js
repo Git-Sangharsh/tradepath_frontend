@@ -108,13 +108,13 @@ const Login = () => {
           </p>
           <input
             type="email"
-            placeholder="Email"
+            placeholder="hello@gmail.com"
             className="auth-input font-var-2"
             onChange={handleEmail}
           />
           <input
             type="password"
-            placeholder="Password"
+            placeholder="123"
             className="auth-input font-var-2"
             onChange={handlePassword}
           />

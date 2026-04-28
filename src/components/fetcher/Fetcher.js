@@ -22,16 +22,21 @@ const Fetcher = () => {
           }
         );
 
-        dispatch({ type: "SET_ANALYSE_DATA", payload: demoData.analysis });
-        dispatch({ type: "SET_JOURNAL_DATA", payload: demoData.entries });
-        dispatch({ type: "SET_FETCHER_DATA", payload:demoData})
+        setTimeout(() => {
+          dispatch({type: "SET_GET_JOURNAL_LOADER", payload: false});
+          dispatch({ type: "SET_ANALYSE_DATA", payload: demoData.analysis });
+          dispatch({ type: "SET_JOURNAL_DATA", payload: demoData.entries });
+          dispatch({ type: "SET_FETCHER_DATA", payload:demoData})
+
+        }, 2000)
 
 
         // console.log("data is fetch from the fetcher ", res.data);
       } catch (err) {
         console.error("error fetching data ", err);
       } finally{
-        dispatch({type: "SET_GET_JOURNAL_LOADER", payload: false})
+        // dispatch({type: "SET_GET_JOURNAL_LOADER", payload: false})
+
       }
     };
 

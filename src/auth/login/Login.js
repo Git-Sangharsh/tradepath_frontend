@@ -11,8 +11,8 @@ const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  const [email, setEmail] = useState("hello@gmail.com");
+  const [password, setPassword] = useState("123");
   const [error, setError] = useState(null);
 
   const handleEmail = (e) => {
@@ -111,12 +111,14 @@ const Login = () => {
             placeholder="hello@gmail.com"
             className="auth-input font-var-2"
             onChange={handleEmail}
+            onFocus={() => setEmail("hello@gmail.com" && setEmail(""))}
           />
           <input
             type="password"
             placeholder="123"
             className="auth-input font-var-2"
             onChange={handlePassword}
+            onFocus={() => setPassword("123" && setPassword(""))}
           />
           <button className="auth-btn font-var-2" onClick={submitBtn}>
             Login

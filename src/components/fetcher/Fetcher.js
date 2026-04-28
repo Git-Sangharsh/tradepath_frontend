@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import axios from "axios";
+// import axios from "axios";
 import { useDispatch } from "react-redux";
 import { demoData } from "../../demo";
 
@@ -8,19 +8,19 @@ const Fetcher = () => {
 
   useEffect(() => {
     const fetchJournal = async () => {
-      const token = localStorage.getItem("token");
+      // const token = localStorage.getItem("token");
 
       try {
         // start of getJournalLoader
         dispatch({type: "SET_GET_JOURNAL_LOADER", payload: true})
-        const res = await axios.get(
-          `${process.env.REACT_APP_API_URL}/api/journal/get-journal`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        // const res = await axios.get(
+        //   `${process.env.REACT_APP_API_URL}/api/journal/get-journal`,
+        //   {
+        //     headers: {
+        //       Authorization: `Bearer ${token}`,
+        //     },
+        //   }
+        // );
 
         setTimeout(() => {
           dispatch({type: "SET_GET_JOURNAL_LOADER", payload: false});

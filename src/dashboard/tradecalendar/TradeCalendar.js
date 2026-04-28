@@ -101,16 +101,16 @@ const TradeCalendar = () => {
 
     for (let day = 1; day <= daysInMonth; day++) {
       const trade = tradeMap[day]; // Use tradeMap directly
-      const isWin = trade?.wins > trade?.losses;
+      // const isWin = trade?.wins > trade?.losses;
       const isLoss = trade?.losses > trade?.wins;
 
       const cellClass = trade
-        ? isWin
-          ? "win"
-          : isLoss
-          ? "loss"
-          : "neutral"
-        : "";
+      ? trade.pnl > 0
+        ? "win"
+        : trade.pnl < 0
+        ? "loss"
+        : "neutral"
+      : "";
 
           // ✅ Format pnl value
   const pnlValue =

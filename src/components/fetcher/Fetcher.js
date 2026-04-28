@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
+import { demoData } from "../../demo";
 
 const Fetcher = () => {
   const dispatch = useDispatch();
@@ -21,9 +22,9 @@ const Fetcher = () => {
           }
         );
 
-        dispatch({ type: "SET_ANALYSE_DATA", payload: res.data.analysis });
-        dispatch({ type: "SET_JOURNAL_DATA", payload: res.data.entries });
-        dispatch({ type: "SET_FETCHER_DATA", payload: res.data})
+        dispatch({ type: "SET_ANALYSE_DATA", payload: demoData.analysis });
+        dispatch({ type: "SET_JOURNAL_DATA", payload: demoData.entries });
+        dispatch({ type: "SET_FETCHER_DATA", payload:demoData})
 
 
         // console.log("data is fetch from the fetcher ", res.data);

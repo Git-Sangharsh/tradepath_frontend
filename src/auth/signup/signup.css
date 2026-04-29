@@ -96,7 +96,7 @@
   top: 0;
   right: 0;
   bottom: 0;
-  width: 60%;
+  width: 100%;
   z-index: 1;
   overflow: hidden;
 }
@@ -129,7 +129,7 @@
   }
 
   .video-wrapper {
-    width: 50%;
+    width: 100%;
   }
 
   .auth-box {
